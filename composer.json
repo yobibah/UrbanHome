@@ -1,0 +1,19 @@
+{
+    "name": "yobib/urban-home",
+    "autoload": {
+        "psr-4": {
+            "Yobib\\UrbanHome\\": "src/",
+             "config\\": "config/", 
+            "controllers\\": "controllers/", 
+            "routes\\": "routes/",
+            "model\\": "model/"
+            
+        }
+    },
+    "authors": [
+        {
+            "name": "SPSERCHMOSACK"
+        }
+    ],
+    "require": {}
+}
