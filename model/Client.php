@@ -1,4 +1,6 @@
 <?php
+namespace model;
+
 class Client {
     public $id;
     public $nom;

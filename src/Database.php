@@ -1,4 +1,6 @@
 <?php
+namespace Yobib\UrbanHome;
+
 class Database {
     private static $instance = null;
     private $pdo;
@@ -8,7 +10,7 @@ class Database {
         $dbname = DB_NAME;
         $user = DB_USER;
         $pass = DB_PASS;
-        $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+        $this->pdo = new \PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
     }
 
     public static function getInstance() {

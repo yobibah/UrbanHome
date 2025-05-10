@@ -1,4 +1,6 @@
 <?php
+namespace routes;
+
 $routes = [
     '/' => [
         'controller' => 'HomeControllers',
