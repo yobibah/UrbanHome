@@ -1,6 +1,8 @@
 <?php
 namespace controllers;
 
+use Yobib\UrbanHome\Database;
+
 class ClientControllers {
     // Affiche le formulaire d'inscription
     public function register() {
