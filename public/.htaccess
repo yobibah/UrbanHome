@@ -6,4 +6,4 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Redirige tout le reste vers index.php
-RewriteRule ^(.*)$ public/index.php [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
