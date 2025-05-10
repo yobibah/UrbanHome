@@ -1,3 +1,4 @@
+<?php include __DIR__ . '/../layout/header.php'; ?>
 <h2>Inscription Client</h2>
 <form method="post" action="/client/store">
     <input type="text" name="nom" placeholder="Nom" required>
@@ -9,3 +10,4 @@
     <input type="text" name="telephone" placeholder="Téléphone" required>
     <button type="submit">S'inscrire</button>
 </form>
+<?php include __DIR__ . '/../layout/footer.php'; ?>

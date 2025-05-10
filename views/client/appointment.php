@@ -1,3 +1,4 @@
+<?php include __DIR__ . '/../layout/header.php'; ?>
 <h2>Prendre rendez-vous</h2>
 <form method="post" action="/client/appointment">
     <input type="text" name="propriete" placeholder="Propriété">
@@ -5,3 +6,4 @@
     <input type="time" name="heure" required>
     <button type="submit">Prendre rendez-vous</button>
 </form>
+<?php include __DIR__ . '/../layout/footer.php'; ?>

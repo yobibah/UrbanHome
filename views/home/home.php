@@ -1,4 +1,2 @@
 <?php include __DIR__ . '/../layout/header.php'; ?>
-<h2>Tableau de bord Employé</h2>
-<p>Bienvenue, cher employé !</p>
 <?php include __DIR__ . '/../layout/footer.php'; ?>
