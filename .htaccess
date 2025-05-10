@@ -1,0 +1,9 @@
+# Active la réécriture d'URL
+RewriteEngine On
+
+# Ignore les fichiers et dossiers existants
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirige tout le reste vers index.php
+RewriteRule ^(.*)$ public/index.php [QSA,L]
