@@ -1,0 +1,115 @@
+/* --- Layout type application web --- */
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+    padding: 2rem;
+    min-height: 70vh;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+/* --- Fin layout application web --- */
+/* Responsive design */
+@media (max-width: 900px) {
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    main {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 0.95rem;
+    }
+    header, nav, footer {
+        padding: 0.5rem;
+    }
+    nav ul {
+        gap: 0.2rem;
+    }
+    main {
+        padding: 0.5rem;
+    }
+    .home-banner h1 {
+        font-size: 1.3rem;
+    }
+    .home-section h2 {
+        font-size: 1.1rem;
+    }
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, nav, footer {
+    background-color: #6c63ff;
+    color: #fff;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #ffb347;
+}
+
+main {
+    padding: 2rem;
+    min-height: 70vh;
+    flex: 1 0 auto;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    background-color: #4b47a3;
+    color: #fff;
+    margin-top: 2rem;
+    width: 100%;
+    /* Pas de position: fixed pour un footer "normal" d'appli web */
+    flex-shrink: 0;
+}
+
+html, body {
+    height: 100%;
+}
