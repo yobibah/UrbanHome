@@ -8,7 +8,7 @@ use routes\Router;
 
 App::init();
 
-//define('VIEW_PATH', __DIR__ . '/../views/');
+define('VIEW_PATH', __DIR__ . '/../views/');
 
 $router = new Router();
 $router->register('/', ['controllers\HomeControllers', 'home']);
