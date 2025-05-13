@@ -10,6 +10,12 @@ class Database
     {
     }
 
+    //le  fichier de configuration  dans config/config.php s'occupe de la connexion à la base de données
+    // on fais juste une instance de la classe Config dans le model de donnes et ces bon;
+
+
+
+    /*
     public static function getInstance(): \PDO
     {
         if (self::$instance === null) {
@@ -21,5 +27,8 @@ class Database
         }
         return self::$instance;
     }
+
+    */
 }
+    
 ?>
