@@ -86,6 +86,8 @@ class ClientControllers {
 
     // Affiche les favoris
     public function favorites() {
+        // recupere le id du client fais une recherche des id du client qui sont 
+        // dans la table favorites
         require __DIR__ . '/../views/client/favorites.php';
     }
 
