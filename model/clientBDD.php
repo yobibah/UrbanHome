@@ -1,6 +1,5 @@
 <?php 
 namespace model;
-require_once('vendor/autoload.php');
 
 use config\Config;
 use PDO;
