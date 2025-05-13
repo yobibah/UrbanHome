@@ -3,6 +3,6 @@ namespace controllers;
 
 class HomeControllers {
     public function home() {
-        require_once VIEW_PATH . 'home/home.php';
+        require_once VIEW_PATH . 'public/home.php';
     }
 }
