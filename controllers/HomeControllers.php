@@ -4,6 +4,6 @@ require_once('vendor/autoload.php');
 
 class HomeControllers {
     public function home() {
-        require_once 'public/index.php';
+        require_once 'views/home/home.php';
     }
 }
