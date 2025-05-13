@@ -1,98 +1,33 @@
 <?php
-
 namespace model;
 
-class Client
+require_once __DIR__ . '/../vendor/autoload.php';
+use model\Users;
+use config\Config;
+Class Client extends Users {
+    private $username;
+ 
+    public function __construct(string $nom, string $prenom, string $email, string $password, $numero_telephone, $username, $adresse)
+    {
+        parent::__construct($nom, $prenom, $email, $password, $numero_telephone, $username, $adresse);
+        $this->username = $username;
+    }
+     public function getusername(): string
+    {
+        return $this->username;
+    }
+ 
+  public function setUsername($username): string
 {
-    private string $nom;
-    private string $prenom;
-    private $email;
-    private $pass;
-    private $date_naissance;
-    private $id_utilisateurs;
-    private $photo_profile;
-    private $date_inscription;
-    public function __construct(string $nom, string $prenom,  $email,  $pass,  $date_naissance, $date_inscription, $photo_profile = "beeding.jpg")
-    {
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->email = $email;
-        $this->pass = $pass;
-        $this->date_naissance = $date_naissance;
-        $this->date_inscription = $date_inscription;
-        $this->photo_profile = $photo_profile;
-    }
-
-    public function getNom(): string
-    {
-        return $this->nom;
-    }
-    public function getPrenom(): string
-    {
-        return $this->prenom;
-    }
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function getPass(): string
-    {
-        return $this->pass;
-    }
-
-    public function getDate_naissance(): string
-    {
-        return $this->date_naissance;
-    }
-    public function getId_utilisateurs(): int
-    {
-        return $this->id_utilisateurs;
-    }
-
-    public function setNom(string $nom)
-    {
-        $this->nom = $nom;
-    }
-
-    public function setPrenom(string $prenom)
-    {
-        $this->prenom = $prenom;
-    }
-
-    public function setEmail(string $email)
-    {
-        $this->email = $email;
-    }
-
-    public function setPass(string $pass)
-    {
-        $this->pass = $pass;
-    }
-
-    public function setDate_naissance(string $date_naissance)
-    {
-        $this->date_naissance = $date_naissance;
-    }
-
-    public function get_photo()
-    {
-        return $this->photo_profile;
-    }
-
-    public function set_photo($photo)
-    {
-        $this->photo_profile = $photo;
-    }
-
-    public function get_date_inscription()
-    {
-        return $this->date_inscription;
-    }
-
-    public function set_date_inscription($date_inscription)
-    {
-        $this->date_inscription = $date_inscription;
-        return $this->date_inscription;
-    }
+    $this->username = $username;
+    return $this->username;
 }
+
+}
+
+//test sur limplementation de la classe Clientz
+
+$client = new Client("Doe", "John", "johndoe@gmail.com", "password", "77777777", "johndoe", "rue de la paix");
+echo ''.$client->setUsername("titi")."\n";
+echo $client->getusername();
+echo $client->getNom();

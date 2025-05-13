@@ -9,7 +9,7 @@ class Config {
 
     private function __construct() {
         $host = 'localhost';
-        $db_name = 'beeding';
+        $db_name = 'urbanhome';
         $username = 'root';
         $password = '';
 
