@@ -5,6 +5,7 @@ require_once __DIR__ . '/../src/App.php';
 
 use src\App;
 use routes\Router;
+use controllers\HomeControllers;
 
 App::init();
 

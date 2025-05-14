@@ -1,33 +1,91 @@
 <?php
 namespace model;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 use model\Users;
 use config\Config;
-Class Client extends Users {
-    private $username;
- 
-    public function __construct(string $nom, string $prenom, string $email, string $password, $numero_telephone, $username, $adresse)
+Class Client  {
+
+    private string $nom;
+    private string $prenom;
+    private string $email;
+    private $mot_de_passe;
+    private $numero_telephone;
+    private $id_agent;
+    private $adresse;
+
+
+    public function __construct(string $nom, string $prenom, string $adresse, string $email, $numero_telephone, $mot_de_passe,$id_agent)
     {
-        parent::__construct($nom, $prenom, $email, $password, $numero_telephone, $username, $adresse);
-        $this->username = $username;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->email = $email;
+        $this->mot_de_passe = $mot_de_passe;
+        $this->numero_telephone = $numero_telephone;
+        $this->id_agent = $id_agent;
+        $this->adresse = $adresse;
     }
-     public function getusername(): string
+
+     public  function getNom(): string
     {
-        return $this->username;
+        return $this->nom;
     }
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+    public function getPassword(): string
+    {
+        return $this->mot_de_passe;
+    }
+    public function getNumero_telephone()
+    {
+        return $this->numero_telephone;
+    }
+  
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+    public function setNom(string $nom)
+    {
+        $this->nom = $nom;
+    }
+    public function setPrenom(string $prenom)
+    {
+        $this->prenom = $prenom;
+    }
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+    }
+    public function setPassword(string $password)
+    {
+        $this->mot_de_passe = $password;
+    }
+    public function setNumero_telephone($numero_telephone)
+    {
+        $this->numero_telephone = $numero_telephone;
+    }
+  
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+    public function setId_agent($id_agent)
+    {
+        $this->id_agent = $id_agent;
+    }
+    public function getId_agent()
+    {
+        return $this->id_agent;
+    }
+
  
-  public function setUsername($username): string
-{
-    $this->username = $username;
-    return $this->username;
-}
 
 }
 
 //test sur limplementation de la classe Clientz
-
-$client = new Client("Doe", "John", "johndoe@gmail.com", "password", "77777777", "johndoe", "rue de la paix");
-echo ''.$client->setUsername("titi")."\n";
-echo $client->getusername();
-echo $client->getNom();

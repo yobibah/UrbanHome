@@ -16,17 +16,18 @@ class clientBDD extends Client{
        
     }
 
-    public function insertClient(Client $client): bool
+    public function insertClient($idagent ,Client $client): bool
     {
-        $stmt = $this->pdo->prepare("INSERT INTO client (nom, prenom, email, password, numero_telephone, username, adresse) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO client (nom, prenom, adresse,email,telephone,mot_de_passe,id_agent ) VALUES (:nom, :prenom, :adresse,:email, :telephone,:mot_de_passe,:id_agent )");
         return $stmt->execute([
-            $client->getNom(),
-            $client->getPrenom(),
-            $client->getEmail(),
-            $client->getPassword(),
-            $client->getNumero_telephone(),
-            $client->getusername(),
-            $client->getAdresse()
+          'nom'=> $client->getNom(),
+            'prenom'=>$client->getPrenom(),
+           'email'=> $client->getEmail(),
+            'mot_de_passe'=>$client->getPassword(),
+            'telephone'=>$client->getNumero_telephone(),
+    
+           'adresse'=> $client->getAdresse(),
+            'id_agent'=> $client->getId_agent(),
         ]);
     }
 
@@ -34,9 +35,9 @@ class clientBDD extends Client{
     {
         $stmt = $this->pdo->prepare("SELECT * FROM client WHERE email = ?");
         $stmt->execute([$email]);
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($data) {
-            return new Client($data['nom'], $data['prenom'], $data['email'], $data['password'], $data['numero_telephone'], $data['username'], $data['adresse']);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']);
         }
         return null;
     }
@@ -45,9 +46,9 @@ class clientBDD extends Client{
     {
         $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id = ?");
         $stmt->execute([$id]);
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($data) {
-            return new Client($data['nom'], $data['prenom'], $data['email'], $data['password'], $data['numero_telephone'], $data['username'], $data['adresse']);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']);
         }
         return null;
     }
@@ -62,7 +63,7 @@ class clientBDD extends Client{
             $client->getEmail(),
             $client->getPassword(),
             $client->getNumero_telephone(),
-            $client->getusername(),
+      
             $client->getAdresse(),
             
            
@@ -71,7 +72,7 @@ class clientBDD extends Client{
 
     public function deleteClient($id): bool
     {
-        $stmt = $this->pdo->prepare("DELETE FROM client WHERE id = ?");
+        $stmt = $this->pdo->prepare("DELETE FROM client WHERE id_client = ?");
         return $stmt->execute([$id]);
     }
 
@@ -84,8 +85,9 @@ class clientBDD extends Client{
 
         foreach ($data as $row) {
             $clients[] = [
-                'id' => $row['id'],
-               'objet'=> new Client($row['nom'], $row['prenom'], $row['email'], $row['password'], $row['numero_telephone'], $row['username'], $row['adresse']),
+                'id' => $row['id_client'],
+               'objet'=> new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']),
+        
             ];
         }
         return $clients;
@@ -95,9 +97,9 @@ class clientBDD extends Client{
 }
 
 //test sur limplementation de la classe Clientz
-$client = new Client("Doe", "John", "john@example.com", "password123", "1234567890", "john.doe", "123 Main St");
+$client = new Client("Doe", "John", "john@example.com", "password123", "1234567890", "123 Main St",1);
 $dao = new clientBDD();
-$dao->insertClient($client);
+$dao->insertClient(1,$client);
 $clients = $dao->getAllClients();
 foreach ($clients as $client) {
     echo $client->getNom() . " " . $client->getPrenom() . "<br>";
