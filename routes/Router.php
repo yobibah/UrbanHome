@@ -1,6 +1,8 @@
 <?php 
 namespace routes;
 
+use controllers\HomeControllers;
+
 class Router {
     private array $routes = [];
 
@@ -13,6 +15,8 @@ class Router {
         $action = $this->routes[$path] ?? null;
 
         if (!$action) {
+            $home = new HomeControllers();
+            $home->error404();
             throw new \Exception("Route introuvable : $path");
         }
 
