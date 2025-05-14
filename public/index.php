@@ -7,8 +7,16 @@ use src\App;
 use routes\Router;
 
 App::init();
-
-define('VIEW_PATH', __DIR__ . '/../views/');
+// Gestion du chemin des assets pour test local (sans -t public) ou production
+if (php_sapi_name() === 'cli-server' && basename(__DIR__) !== 'public') {
+    // Mode test local sans -t public
+    define('ASSET_PATH', '/public/assets/');
+} else {
+    // Production ou test avec -t public
+    define('ASSET_PATH', '/assets/');
+}
+// Pour la production, on utilise un chemin absolu sécurisé pour les vues
+define('VIEW_PATH', realpath(__DIR__ . '/../views/') . DIRECTORY_SEPARATOR);
 
 $router = new Router();
 $router->register('/', ['controllers\HomeControllers', 'home']);

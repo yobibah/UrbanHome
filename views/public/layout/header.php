@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title><?= isset($title) ? htmlspecialchars($title) : 'UrbanHome' ?></title>
-    <link rel="stylesheet" href="<?php echo VIEW_PATH.'assets/css/main.css';?>">
-    <link rel="stylesheet" href="<?php echo VIEW_PATH.'assets/css/home.css';?>">
-    <script src="<?php echo VIEW_PATH.'assets/js/main.js';?>"></script>
+    <link rel="stylesheet" href="<?= ASSET_PATH ?>css/main.css">
+    <link rel="stylesheet" href="<?= ASSET_PATH ?>css/home.css">
+    <script src="<?= ASSET_PATH ?>js/main.js" defer></script>
 </head>
 <body>
 <?php include __DIR__ . '/navbar.php'; ?>
