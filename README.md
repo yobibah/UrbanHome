@@ -19,6 +19,7 @@ UrbanHome est une application web de gestion immobilière basée sur le modèle 
    ```powershell
    composer install
    composer dump-autoload
+   composer require vlucas/phpdotenv(pour vous permet de charger les variables environnement)
    ```
 5. Lancer le serveur PHP intégré :
    ```powershell
