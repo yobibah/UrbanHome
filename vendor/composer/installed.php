@@ -3,7 +3,7 @@
         'name' => 'yobib/urban-home',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8cd1386e56f243382627acdb91e983bebd0bb2dd',
+        'reference' => '2c701205cba98e8bfd85124558c672daf8f5c1b7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'yobib/urban-home' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8cd1386e56f243382627acdb91e983bebd0bb2dd',
+            'reference' => '2c701205cba98e8bfd85124558c672daf8f5c1b7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

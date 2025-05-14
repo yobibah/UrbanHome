@@ -97,7 +97,7 @@ class clientBDD extends Client{
 }
 
 //test sur limplementation de la classe Clientz
-$client = new Client("Doe", "John", "john@example.com", "password123", "1234567890", "123 Main St",1);
+$client = new Client("Doe", "John", "john@example.com", "password123", "1234567890", "123 Main St",2);
 $dao = new clientBDD();
 $dao->insertClient(1,$client);
 $clients = $dao->getAllClients();
