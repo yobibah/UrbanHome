@@ -1,0 +1,12 @@
+<?php ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title><?= isset($title) ? htmlspecialchars($title) : 'UrbanHome' ?></title>
+    <link rel="stylesheet" href="<?php echo VIEW_PATH.'assets/css/main.css';?>">
+    <link rel="stylesheet" href="<?php echo VIEW_PATH.'assets/css/home.css';?>">
+    <script src="<?php echo VIEW_PATH.'assets/js/main.js';?>"></script>
+</head>
+<body>
+<?php include __DIR__ . '/navbar.php'; ?>
