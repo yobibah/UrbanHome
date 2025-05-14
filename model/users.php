@@ -1,7 +1,9 @@
-<?php 
+<?php
+
 namespace model;
 
-abstract class  Users {
+abstract class  Users
+{
     private string $nom;
     private string $prenom;
     private string $email;
@@ -22,7 +24,7 @@ abstract class  Users {
         $this->adresse = $adresse;
     }
 
-     public  function getNom(): string
+    public  function getNom(): string
     {
         return $this->nom;
     }
@@ -43,7 +45,7 @@ abstract class  Users {
     {
         return $this->numero_telephone;
     }
-  
+
     public function getAdresse()
     {
         return $this->adresse;
@@ -68,12 +70,12 @@ abstract class  Users {
     {
         $this->numero_telephone = $numero_telephone;
     }
-  
+
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
     }
 
-     abstract public function getusername():string;
-      abstract public function setUsername(string $username):string;
+    abstract public function getusername(): string;
+    abstract public function setUsername(string $username): string;
 }
