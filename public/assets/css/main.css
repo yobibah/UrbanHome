@@ -41,6 +41,18 @@ main {
     header, nav, footer {
         padding: 0.5rem;
     }
+    
+    #burger{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-content: space-between;
+    }
+    #burger>span{
+        background-color: black;
+        width: 25px;
+        height: 3px;
+    }
     nav ul {
         gap: 0.2rem;
     }
