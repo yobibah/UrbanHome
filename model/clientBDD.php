@@ -1,9 +1,11 @@
 <?php 
 namespace model;
-require_once __DIR__ . '/../vendor/autoload.php';
+//require_once __DIR__ . '/../vendor/autoload.php';
 use config\Config;
 use PDO;
 use model\Client;
+use model\Achat;
+use model\Location;
 
 class clientBDD extends Client{
 
@@ -16,7 +18,8 @@ class clientBDD extends Client{
        
     }
 
-    public function insertClient($idagent ,Client $client): bool
+    // function pour inserer un nouveau client
+    public function insertClient(Client $client): bool
     {
         $stmt = $this->pdo->prepare("INSERT INTO client (nom, prenom, adresse,email,telephone,mot_de_passe,id_agent ) VALUES (:nom, :prenom, :adresse,:email, :telephone,:mot_de_passe,:id_agent )");
         return $stmt->execute([
@@ -31,28 +34,45 @@ class clientBDD extends Client{
         ]);
     }
 
-    public function getClientByEmail(string $email): ?Client
+    // function pour recuperer un client par son email
+    public function getClientByEmail(string $email)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM client WHERE email = ?");
         $stmt->execute([$email]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            return new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']);
-        }
-        return null;
-    }
+        //$row = $stmt->fetch(PDO::FETCH_ASSOC);
+         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    public function getClientById(int $id): ?Client
-    {
+        $clients = [];
+
+        foreach ($data as $row) {
+            $clients[] = [
+                'id' => $row['id_client'],
+               'objet'=> new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']),
+        
+            ];
+        }
+        return $clients;
+    }
+// function pour recuperer un client par son id
+    public function getClientById(int $id)
+        {
         $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id = ?");
         $stmt->execute([$id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            return new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $clients = [];
+
+        foreach ($data as $row) {
+            $clients[] = [
+                'id' => $row['id_client'],
+               'objet'=> new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']),
+        
+            ];
         }
-        return null;
+        return $clients;
     }
 
+    // function pour recuperer un client par son id
 
     public function updateClient($id,Client $client): bool
     {
@@ -69,16 +89,23 @@ class clientBDD extends Client{
            
         ]);
     }
+    // function pour supprimer un client
 
     public function deleteClient($id): bool
     {
-        $stmt = $this->pdo->prepare("DELETE FROM client WHERE id_client = ?");
-        return $stmt->execute([$id]);
+        $stmt = $this->pdo->prepare("DELETE FROM client WHERE id_client = :id");
+        return $stmt->execute([
+            ':id'=>$id]);
     }
 
-    public function getAllClients(): array
+    // function pour recuperer tous les clients
+    public function getAllClients($limit,$ofset)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM client");
+        $stmt = $this->pdo->prepare("SELECT * FROM client 
+        LIMIT :limit OFFSET :ofset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':ofset', $ofset, PDO::PARAM_INT);
+        $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $clients = [];
@@ -93,15 +120,54 @@ class clientBDD extends Client{
         return $clients;
     }
 
+    // foction pour se connecter
+    public function LoginClient($email,$password)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE email = ? AND mot_de_passe = ?");
+        $stmt->execute([$email, $password]);
+       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $clients = [];
+
+        foreach ($data as $row) {
+            $clients[] = [
+                'id' => $row['id_client'],
+               'objet'=> new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']),
+        
+            ];
+        }
+        return $clients;
+        
 
 }
 
-//test sur limplementation de la classe Clientz
-$client = new Client("Doe", "John", "john@doe.com", "password123", "1234567890", "123 Main St",3);
-$dao = new clientBDD();
-$dao->insertClient(1,$client);
-$clients = $dao->getAllClients();
+// function pour acheter une propriete
+public function acheterPropriete(Achat $achat): bool
+{
+    $stmt = $this->pdo->prepare("INSERT INTO achat (id_propriete,id_client,id_agent,date_achat) VALUES (:id_propriete,:id_client,:id_agent,:date_achat)");
+    return $stmt->execute([
+        'id_client' => $achat->getIdClient(),
+        'id_propriete' => $achat->getIdPropriete(),
+        'id_agent' => $achat->getIdAgent(),
+        'date_achat' => $achat->getDateAchat(),
 
-foreach ($clients as $client) {
-    echo $client['objet']->getNom() . " " . $client['objet']->getPrenom() . "<br>";
+
+    ]);
+
+}
+//fonctoion pour louer des appartements
+
+public function louerpropriete(Location $location): bool
+{
+    $stmt = $this->pdo->prepare("INSERT INTO location (id_propriete,id_client,id_agent,date_debut,date_fin) VALUES (:id_propriete,:id_client,:id_agent,:date_location)");
+    return $stmt->execute([
+        'id_client' => $location->getIdClient(),
+        'id_propriete' => $location->getIdPropriete(),
+        'id_agent' => $location->getIdAgent(),
+        'date_debut' => $location->getDateDebut(),
+        'date_fin' => $location->getDateFin(),      
+    ]);
+   
+}
+
 }
