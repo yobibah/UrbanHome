@@ -3,7 +3,10 @@ namespace controllers;
 
 class HomeControllers extends Controllers{
     public function home() {
-        $this->render('public/home');
+        $this->render('auth/connexion');
+    }
+     public function connexion_baileur() {
+        $this->render('bailleur/auth/connexion');
     }
     public function about() {
         $this->render('public/about');

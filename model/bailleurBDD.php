@@ -96,18 +96,34 @@ class BailleurBDD extends Bailleur
 
     // pas de medthode pour l'instant
 
+    
     public function loginBailleur($email, $password)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM bailleur WHERE email = ? AND mot_de_passe = ?");
-        $stmt->execute([$email, $password]);
+        $stmt = $this->pdo->prepare("SELECT * FROM bailleur WHERE email = :email ");
+        $stmt->execute(['email'=>$email]);
         $row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $bailleurs = [];
-        foreach ($row as $data) {
-            $bailleurs[] = [
-                'id' => $data['id_bailleur'],
-                'objet' => new Bailleur($data['nom'], $data['prenom'], $data['raison_social'], $data['adresse'], $data['email'], $data['telephone'], $data['mot_de_passe']),
-            ];
+        if(password_verify($password, $row['mot_de_passe'])){
+            $bailleurs = [];
+            foreach ($row as $data) {
+                $bailleurs[] = [
+                    'id' => $data['id_bailleur'],
+                    'objet' => new Bailleur($data['nom'], $data['prenom'], $data['raison_social'], $data['adresse'], $data['email'], $data['telephone'], $data['mot_de_passe']),
+                ];
+            }
+            return $bailleurs;
         }
-        return $bailleurs;
+        else{
+            return false;
+        }
+            
+       
+    }
+
+    public function verifierEmail($email)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM bailleur WHERE email = ?");
+        $stmt->execute([$email]);
+        $row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return count($row) > 0;
     }
 }
