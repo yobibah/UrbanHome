@@ -137,6 +137,8 @@ class ProprieteBDD extends Propriete{
     }
 
     
+
+
     // pour l'instantj'ai plus d'autres methodes a definir 
 
 }

@@ -64,4 +64,18 @@ class ManagerBDD extends Manager {
 
     }
 
+    public function getManagerById(int $id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM manager WHERE id_manager = :id");
+        $stmt->execute([':id' => $id]);
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $managers = [];
+        foreach ($data as $row) {
+            $managers[] = [
+                'id' => $row['id_manager'],
+                'objet' => new Manager($row['nom'], $row['prenom'], $row['email'], $row['password']),
+            ];
+        }
+        return $managers;
+    }
+
 }
