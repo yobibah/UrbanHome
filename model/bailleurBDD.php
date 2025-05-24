@@ -97,27 +97,36 @@ class BailleurBDD extends Bailleur
     // pas de medthode pour l'instant
 
     
-    public function loginBailleur($email, $password)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM bailleur WHERE email = :email ");
-        $stmt->execute(['email'=>$email]);
-        $row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        if(password_verify($password, $row['mot_de_passe'])){
-            $bailleurs = [];
-            foreach ($row as $data) {
-                $bailleurs[] = [
-                    'id' => $data['id_bailleur'],
-                    'objet' => new Bailleur($data['nom'], $data['prenom'], $data['raison_social'], $data['adresse'], $data['email'], $data['telephone'], $data['mot_de_passe']),
-                ];
-            }
-            return $bailleurs;
-        }
-        else{
-            return false;
-        }
-            
-       
+public function loginBailleur($email, $password)
+{
+    $stmt = $this->pdo->prepare("SELECT * FROM bailleur WHERE email = :email");
+    $stmt->execute(['email' => $email]);
+    $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    foreach ($data as $row) {
+        if (password_verify($password, $row['mot_de_passe'])) {
+        // Connexion réussie, on retourne les données utiles
+        return [
+            'id' => $row['id_bailleur'],
+            'objet' => new Bailleur(
+                $row['nom'],
+                $row['prenom'],
+                $row['raison_social'],
+                $row['adresse'],
+                $row['email'],
+                $row['telephone'],
+                $row['mot_de_passe']
+            )
+        ];
+    } else {
+        // Mauvais mot de passe ou email inexistant
+        return false;
     }
+    }
+
+
+}
+
 
     public function verifierEmail($email)
     {

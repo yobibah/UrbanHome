@@ -1,3 +1,4 @@
+<?php require_once VIEW_PATH . 'public/layout/header.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

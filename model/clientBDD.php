@@ -6,6 +6,8 @@ use PDO;
 use model\Client;
 use model\Achat;
 use model\Location;
+use model\Propriete;
+use model\ProprieteBDD;
 
 class clientBDD extends Client
 {

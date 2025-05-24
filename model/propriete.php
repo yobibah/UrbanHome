@@ -2,34 +2,37 @@
 namespace model;
 
 class Propriete{
-    private string $type;
+    private int $id_type;
     private string $etat;
     private $opt;
-    private string $adresse;
+    private string $situation_geo;
     private float $prix;
     private string $image1;
     private string $image2;
     private string $image3;
-    private string $description;
-    private string $id_bailleur;
+    private string $descriptions;
+    private  $id_bailleur;
+    private  $date;
 
 
-    public function __construct(string $type, string $etat, string $adresse, float $prix, string $image1, string $image2, string $image3, string $description, string $id_bailleur)
+    public function __construct(int $id_type, string $etat, $opt, string $situation_geo, float $prix, string $image1, string $image2, string $image3, string $descriptions,  $id_bailleur,$date)
     {
-        $this->type = $type;
+        $this->id_type = $id_type;
         $this->etat = $etat;
-        $this->adresse = $adresse;
+        $this->opt = $opt;
+        $this->situation_geo = $situation_geo;
         $this->prix = $prix;
         $this->image1 = $image1;
         $this->image2 = $image2;
         $this->image3 = $image3;
-        $this->description = $description;
+        $this->descriptions = $descriptions;
         $this->id_bailleur = $id_bailleur;
+        $this->date = $date;
     }
 
-    public function getType(): string
+    public function getIdType(): string
     {
-        return $this->type;
+        return $this->id_type;
     }
     public function getEtat(): string
     {
@@ -41,7 +44,7 @@ class Propriete{
     }
     public function getAdresse(): string
     {
-        return $this->adresse;
+        return $this->situation_geo;
     }
     public function getPrix(): float
     {
@@ -61,15 +64,15 @@ class Propriete{
     }
     public function getDescription(): string
     {
-        return $this->description;
+        return $this->descriptions;
     }
     public function getIdbailleur(): string
     {
         return $this->id_bailleur;
     }
-    public function setType(string $type)
+    public function setType(int $id_type)
     {
-        $this->type = $type;
+        $this->id_type = $id_type;
     }
     public function setEtat(string $etat)
     {
@@ -82,7 +85,7 @@ class Propriete{
 
     public function setAdresse(string $adresse)
     {
-        $this->adresse = $adresse;
+        $this->situation_geo = $adresse;
     }
     public function setPrix(float $prix)
     {
@@ -102,10 +105,17 @@ class Propriete{
     }
     public function setDescription(string $description)
     {
-        $this->description = $description;
+        $this->descriptions = $description;
     }
-    public function setId_bailleur(string $id_bailleur)
+    public function setId_bailleur(int $id_bailleur)
     {
         $this->id_bailleur = $id_bailleur;
     }
+    public function getDate(){
+        return $this->date;
+    }
+      public function SetDate($date){
+        return $this->date=$date;
+    }
+
 }

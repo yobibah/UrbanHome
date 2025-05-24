@@ -11,14 +11,14 @@ class Bailleur{
     private string $raison_social;
 
 
-    public function __construct(string $nom, string $prenom,string $raison_social,string $adresse, string $email, string $telephone, string $mot_de_passe)
+    public function __construct( $nom,  $prenom, $raison_social, $adresses,  $email,  $telephone,  $mot_de_passe)
     {
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->email = $email;
         $this->mot_de_passe = $mot_de_passe;
         $this->telephone = $telephone;
-        $this->adresse = $adresse;
+        $this->adresse = $adresses;
         $this->raison_social = $raison_social;
     }
     public function getNom(): string
