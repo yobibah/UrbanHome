@@ -5,6 +5,7 @@
             <h2 class="text-2xl font-bold">Espace Bailleur</h2>
             <nav class="space-y-2">
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-600">Tableau de bord</a>
+                <a href="/" class="block px-4 py-2 rounded hover:bg-blue-600">acceuil</a>
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-600">Mes Proprietes</a>
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-600">Demandes reçues</a>
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-600">Profil</a>

@@ -22,7 +22,7 @@ define('VIEW_PATH', realpath(__DIR__ . '/../views/') . DIRECTORY_SEPARATOR);
 
 $router = new Router();
 $router->register('/', ['controllers\HomeControllers', 'home']);
-//$router->register('/index.php', ['controllers\HomeControllers', 'home']);
+$router->register('/propriete', ['controllers\HomeControllers', 'listes_prorpietes_home']);
 $router->register('/register', ['controllers\BailleurControllers', 'register']);
 $router->register('/add', ['controllers\BailleurControllers', 'add']);
 $router->register('/home-bailleur', ['controllers\BailleurControllers', 'login_Bailleur']);

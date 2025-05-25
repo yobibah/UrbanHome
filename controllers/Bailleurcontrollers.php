@@ -65,10 +65,26 @@ public function register()
         $this->render('public/home');
     }
 }
+public function home(){
+    if(isset($_SESSION['id'])){
+        $this->render('bailleur/dasbord');
+    }
+    else{
+        $this->render('bailleur/auth/connexion');
+    }
+
+
+}
 
 // functiomn pour recuperer les donnes du bailleur et se connecter
 public function login_Bailleur()
 {
+    // Si l'utilisateur est déjà connecté, on redirige vers l'accueil bailleur
+    if (isset($_SESSION['id'])) {
+        $this->render('bailleur/accueil');
+        return;
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = htmlspecialchars(trim($_POST['email']));
         $mot_de_passe = htmlspecialchars(trim($_POST['mot_de_passe']));
@@ -85,17 +101,20 @@ public function login_Bailleur()
             $_SESSION['adresse'] = $bailleurs['objet']->getAdresse();
             $_SESSION['raison_social'] = $bailleurs['objet']->getRaisonSocial();
             $_SESSION['id'] = $bailleurs['id'];
+
             $this->render('bailleur/accueil');
             exit();
-        }
-        else{
-            $_SESSION['msg']='email ou mot de passe incorrect';
+        } else {
+            $_SESSION['msg'] = 'email ou mot de passe incorrect';
             $this->render('bailleur/auth/connexion', ['error' => $_SESSION['msg'] ]);
             return;
         }
-
+    } else {
+        // Si ce n'est pas une requête POST (ex : accès direct à la page), afficher le formulaire
+        $this->render('bailleur/auth/connexion');
     }
 }
+
 
 // controler pour creer de nouvelles insertions de proprietes
 
@@ -175,7 +194,7 @@ public function add() {
         $proprieteBDD = new ProprieteBDD();
         if ($proprieteBDD->insertPropriete($propriete)) {
             $_SESSION['msg'] = "Propriété ajoutée avec succès.";
-            $this->render('bailleur/propriete/detail');
+            $this->render('bailleur/accueil');
         } else {
             $_SESSION['msg'] = "Erreur lors de l'ajout de la propriété.";
             $this->render('bailleur/propriete/add');

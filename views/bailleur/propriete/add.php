@@ -109,8 +109,7 @@ header("Expires: 0");
                 Se connecter
             </a>
         </div>
-    <?php endif; ?>
-
+    <?php endif; ?> 
 </body>
 
 </html>
