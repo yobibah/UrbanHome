@@ -4,7 +4,9 @@ namespace routes;
 use controllers\HomeControllers;
 
 class Router {
-    private array $routes = [];
+    private array $routes = [
+        '/public/propriete/detail' => ['controllers\HomeControllers', 'detail'],
+    ];
 
     public function register(string $path, callable|array $action): void {
         $this->routes[$path] = $action;

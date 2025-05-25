@@ -40,7 +40,7 @@
                         <p class="text-gray-500 text-sm mb-4">Type : <span class="font-medium"><?= $propriete['type']->getlibele() ?></span></p>
 
                         <!-- Bouton -->
-                        <a href="/detail?id=<?= base64_encode($propriete['id']) ?>" class="inline-block bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 text-sm font-medium transition">
+                        <a href="/public/propriete/detail?id=<?= base64_encode($propriete['id']) ?>" class="inline-block bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 text-sm font-medium transition">
                             Voir plus
                         </a>
                     </div>
