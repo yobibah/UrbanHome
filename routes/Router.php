@@ -5,7 +5,15 @@ use controllers\HomeControllers;
 
 class Router {
     private array $routes = [
+        '/' => ['controllers\HomeControllers', 'home'],
+        '/index.php' => ['controllers\HomeControllers', 'home'],
+        '/public/about' => ['controllers\HomeControllers', 'about'],
+        '/public/contact' => ['controllers\HomeControllers', 'contact'],
+        '/public/propriete/liste' => ['controllers\HomeControllers', 'listes_prorpietes_home'],
         '/public/propriete/detail' => ['controllers\HomeControllers', 'detail'],
+        '/bailleur' => ['controllers\HomeControllers', 'connexion_baileur'],
+        '/inscription' => ['controllers\HomeControllers', 'connexion_bail'],
+        '/connexion' => ['controllers\HomeControllers', 'connexion_bail'],
     ];
 
     public function register(string $path, callable|array $action): void {
