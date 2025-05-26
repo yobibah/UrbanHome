@@ -62,7 +62,7 @@ public function register()
        
        
     } else {
-        $this->render('public/home');
+        $this->render('bailleur/auth/inscription');
     }
 }
 public function home(){

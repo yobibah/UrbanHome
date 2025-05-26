@@ -28,7 +28,7 @@
             <?php foreach ($proprietes as $propriete): ?>
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
                     <!-- Image de la propriété -->
-                    <img src="assets/images/<?= $propriete['objet']->getImage1() ?>" alt="Propriété" class="w-full h-56 object-cover">
+                    <img src="<?=ASSET_PATH?>images/<?= $propriete['objet']->getImage1() ?>" alt="Propriété" class="w-full h-56 object-cover">
 
                     <!-- Détails de la propriété -->
                     <div class="p-6">
@@ -40,7 +40,7 @@
                         <p class="text-gray-500 text-sm mb-4">Type : <span class="font-medium"><?= $propriete['type']->getlibele() ?></span></p>
 
                         <!-- Bouton -->
-                        <a href="/public/propriete/detail?id=<?= base64_encode($propriete['id']) ?>" class="inline-block bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 text-sm font-medium transition">
+                        <a href="/propriete/detail?id=<?= base64_encode($propriete['id']) ?>" class="inline-block bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 text-sm font-medium transition">
                             Voir plus
                         </a>
                     </div>

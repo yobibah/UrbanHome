@@ -40,7 +40,7 @@
                 <div class="mt-6 flex flex-wrap gap-4">
                     <a href="/Demande-Visite?id=<?= base64_encode($propriete['id']) ?>"
                         class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Demander une visite</a>
-                    <a href="/proprietes"
+                    <a href="/"
                         class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">Retour</a>
                     <?php if ($_SESSION['id_client']): ?>
                         <a href="/ajouter-favoris?id=<?= base64_encode($propriete['id']) ?>"

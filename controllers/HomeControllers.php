@@ -30,7 +30,7 @@ class HomeControllers extends Controllers{
         $id = base64_decode($id);
         $proprietes = $propriete->getProprieteById($id);
         if($proprietes){
-            $this->render('public/propriete/detail', ['proprietes' => $proprietes]);
+            $this->render('propriete/detail', ['proprietes' => $proprietes]);
         }
         else{
             $this->render('error/404');

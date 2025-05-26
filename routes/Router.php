@@ -7,22 +7,33 @@ class Router {
     private array $routes = [
         '/' => ['controllers\HomeControllers', 'home'],
         '/index.php' => ['controllers\HomeControllers', 'home'],
+
+        //public routes
         '/public/about' => ['controllers\HomeControllers', 'about'],
         '/public/contact' => ['controllers\HomeControllers', 'contact'],
-        '/public/propriete/liste' => ['controllers\HomeControllers', 'listes_prorpietes_home'],
-        '/public/propriete/detail' => ['controllers\HomeControllers', 'detail'],
-        '/bailleur' => ['controllers\HomeControllers', 'connexion_baileur'],
-        '/inscription' => ['controllers\HomeControllers', 'connexion_bail'],
-        '/connexion' => ['controllers\HomeControllers', 'connexion_bail'],
+        '/public/search' => ['controllers\HomeControllers', 'search'],
+        '/public/search/result' => ['controllers\HomeControllers', 'searchResult'],
+
+        //propriete routes
+        '/propriete/liste' => ['controllers\HomeControllers', 'listes_proprietes_home'],
+        '/propriete/detail' => ['controllers\HomeControllers', 'detail'],
+
+        //bailleur routes
+        '/bailleur' => ['controllers\BailleurControllers','login_bailleur'],
+        '/bailleur/inscription' => ['controllers\BailleurControllers', 'register'],
         '/bailleur/dashboard' => ['controllers\BailleurControllers', 'dashboard'],
         '/bailleur/biens' => ['controllers\BailleurControllers', 'listBiens'],
         '/bailleur/contrats' => ['controllers\BailleurControllers', 'listContrats'],
         '/bailleur/paiements' => ['controllers\BailleurControllers', 'listPaiements'],
         '/bailleur/messages' => ['controllers\BailleurControllers', 'listMessages'],
+
+        //client routes
         '/client/dashboard' => ['controllers\ClientControllers', 'dashboard'],
         '/client/locations' => ['controllers\ClientControllers', 'listLocations'],
         '/client/paiements' => ['controllers\ClientControllers', 'listPaiements'],
         '/client/messages' => ['controllers\ClientControllers', 'listMessages'],
+
+        //manager routes
         '/manager/dashboard' => ['controllers\ManagerControllers', 'dashboard'],
         '/manager/clients' => ['controllers\ManagerControllers', 'listClients'],
         '/manager/biens' => ['controllers\ManagerControllers', 'listBiens'],
