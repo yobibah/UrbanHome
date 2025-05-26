@@ -37,7 +37,7 @@ header("Expires: 0");
     <div class="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-8">
         <h2 class="text-2xl font-bold text-green-600 mb-6 text-center">Connexion Bailleur</h2>
 
-        <form method="POST" action="/home-bailleur" class="space-y-6">
+        <form method="POST" action="/bailleur" class="space-y-6">
             <div>
                 <label for="email" class="block text-gray-700 font-medium">Email</label>
                 <input type="email" name="email" id="email" required
@@ -58,7 +58,7 @@ header("Expires: 0");
 
         <p class="mt-6 text-center text-sm text-gray-600">
             Vous n'avez pas de compte ? 
-            <a href="/Inscription" class="text-green-600 hover:underline">S'inscrire</a>
+            <a href="/bailleur/inscription" class="text-green-600 hover:underline">S'inscrire</a>
         </p>
     </div>
 </div>

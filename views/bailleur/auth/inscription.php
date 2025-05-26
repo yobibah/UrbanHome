@@ -106,7 +106,7 @@
 
         <p class="mt-6 text-center text-sm text-gray-600">
             Vous avez déjà un compte ?
-            <a href="/connexion-bailleur" class="text-green-600 hover:underline">Se connecter</a>
+            <a href="/bailleur" class="text-green-600 hover:underline">Se connecter</a>
         </p>
     </div>
 </body>

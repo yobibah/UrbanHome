@@ -44,13 +44,15 @@ class ProprieteBDD extends Propriete{
 
     // cette fonction consiste a recuperer les donnes liees a la propriete et son bailleur pour l'Admin generale
     public function getAlldataforpropriete($limit,$ofset){
-        $smt = $this->pdo->prepare("SELECT p.id_propiete,p.id_type,p.id_type,p.etat,p.opt,p.situation_geo,p.prix,p.image1,p.image2,p.image3,p.descriptions,p.id_bailleur,p.date_ajout,b.nom,b.prenom,b.email,b.adresse, b.telephone,b.raison_social,t.libelle
+        $smt = $this->pdo->prepare("SELECT p.id_propiete,p.id_type,p.etat,p.opt,p.situation_geo,p.prix,p.image1,p.image2,p.image3,p.descriptions,p.id_bailleur,p.date_ajout,b.nom,b.prenom,b.email,b.adresse, b.telephone,b.raison_social,t.libelle
         FROM propriete p  
 
         INNER JOIN bailleur b ON p.id_bailleur = b.id_bailleur
         INNER JOIN type_propriete t ON p.id_type = t.id_type
-        WHERE p.etat = 'libre'
-        LIMIT :limit OFFSET :ofset");
+        WHERE p.etat = 'libre' 
+        ORDER BY p.date_ajout DESC
+        LIMIT :limit OFFSET :ofset 
+        ");
 
         $smt->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $smt->bindParam(':ofset', $ofset, \PDO::PARAM_INT); 
@@ -198,5 +200,10 @@ class ProprieteBDD extends Propriete{
         return $bannieres;
     }
     
+
+    public function countProprietesLibres(): int {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM propriete WHERE etat = 'libre'");
+        return (int)$stmt->fetchColumn();
+    }
     // pour l'instantj'ai plus d'autres methodes a definir 
 }
