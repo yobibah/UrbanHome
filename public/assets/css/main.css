@@ -1,92 +1,149 @@
 /* --- Layout type application web --- */
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f5f5;
-    color: #222;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
-    flex: 1 0 auto;
-    padding: 2rem;
-    min-height: 70vh;
+  flex: 1 0 auto;
+  padding: 2rem;
+  min-height: 70vh;
+}
+.burger {
+  display: none; /* Cacher le burger menu par défaut */
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  cursor: pointer;
+  z-index: 10; /* S'assurer que le burger est au-dessus des autres éléments */
 }
 
+.burger > span {
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.burger.active > span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.active > span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active > span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav {
+  transition: all 0.3s ease; /* Transition fluide pour l'affichage du menu */
+}
+
+.nav {
+  display: flex; /* Afficher le menu de navigation lorsque le burger est activé */
+  flex-direction: row;
+  gap: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ 
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #ffb347;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #fff;
+  margin-top: 2rem;
+  /* Pas de position: fixed pour un footer "normal" d'appli web */
+  flex-shrink: 0;
+}
 
 /* --- Fin layout application web --- */
 /* Responsive design */
 @media (max-width: 900px) {
-    nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
-    }
-    main {
-        padding: 1rem;
-    }
+  .burger {
+    display: flex; /* Afficher le burger menu */
+  }
+
+  .nav {
+    display: none; /* Cacher le menu de navigation par défaut */
+  }
+
+  .nav.active {
+    display: flex; /* Afficher le menu de navigation lorsque le burger est activé */
+    position: absolute;
+    top: 0; /* Ajuster en fonction de la hauteur du header */
+    left: 0;
+    background-color: #fff;
+    width: fit-content;
+    height: 100%;
+    flex-direction: column;
+    z-index: 11;
+  }
+  nav ul {
+    flex-direction: column; /* Changer la direction des éléments du menu */
+    gap: 0.5rem; /* Espacement entre les éléments du menu */
+  }
 }
 
 @media (max-width: 600px) {
-    body {
-        font-size: 0.95rem;
-    }
-    header, nav, footer {
-        padding: 0.5rem;
-    }
-    nav ul {
-        gap: 0.2rem;
-    }
-    main {
-        padding: 0.5rem;
-    }
-    .home-banner h1 {
-        font-size: 1.3rem;
-    }
-    .home-section h2 {
-        font-size: 1.1rem;
-    }
+  body {
+    font-size: 0.95rem;
+  }
+  header,
+  nav,
+  footer {
+    padding: 0.5rem;
+  }
+  nav ul {
+    gap: 0.2rem;
+  }
+  main {
+    padding: 0.5rem;
+  }
+  .home-banner h1 {
+    font-size: 1.3rem;
+  }
+  .home-section h2 {
+    font-size: 1.1rem;
+  }
 }
 
-header, nav, footer {
-    background-color: #6c63ff;
-    color: #fff;
-    padding: 1rem;
+header,
+footer,nav {
+  background-color: #6c63ff;
+  color: #fff;
+  padding: 1rem;
 }
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s;
-}
-
-nav a:hover {
-    color: #ffb347;
-}
-
-
-footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #fff;
-    margin-top: 2rem;
-    /* Pas de position: fixed pour un footer "normal" d'appli web */
-    flex-shrink: 0;
-}
-
