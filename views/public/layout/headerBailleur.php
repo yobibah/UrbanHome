@@ -9,6 +9,6 @@
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-600">Mes Proprietes</a>
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-600">Demandes reçues</a>
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-600">Profil</a>
-                <a href="index.php?action=logout" class="block px-4 py-2 rounded hover:bg-red-600 text-red-200">Déconnexion</a>
+                <a href="/bailleur/logout" class="block px-4 py-2 rounded hover:bg-red-600 text-red-200">Déconnexion</a>
             </nav>
         </aside>

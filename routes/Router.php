@@ -21,6 +21,7 @@ class Router {
         //bailleur routes
         '/bailleur' => ['controllers\BailleurControllers','login_bailleur'],
         '/bailleur/inscription' => ['controllers\BailleurControllers', 'register'],
+        '/bailleur/logout' => ['controllers\BailleurControllers', 'logout'],
         '/bailleur/dashboard' => ['controllers\BailleurControllers', 'dashboard'],
         '/bailleur/biens' => ['controllers\BailleurControllers', 'listBiens'],
         '/bailleur/contrats' => ['controllers\BailleurControllers', 'listContrats'],

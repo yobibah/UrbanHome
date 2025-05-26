@@ -75,6 +75,16 @@ public function home(){
 
 
 }
+public function logout()
+{
+    // Détruire la session pour déconnecter l'utilisateur
+    session_unset();
+    session_destroy();
+
+    // Rediriger vers la page de connexion ou d'accueil
+    header('Location: /bailleur');
+    exit();
+}
 
 // functiomn pour recuperer les donnes du bailleur et se connecter
 public function login_Bailleur()
