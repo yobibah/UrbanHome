@@ -23,18 +23,24 @@ class Router {
         '/bailleur/inscription' => ['controllers\BailleurControllers', 'register'],
         '/bailleur/logout' => ['controllers\BailleurControllers', 'logout'],
         '/bailleur/dashboard' => ['controllers\BailleurControllers', 'dashboard'],
-        '/bailleur/biens' => ['controllers\BailleurControllers', 'listBiens'],
+        '/bailleur/propriete' => ['controllers\BailleurControllers', 'liste'],
         '/bailleur/contrats' => ['controllers\BailleurControllers', 'listContrats'],
         '/bailleur/paiements' => ['controllers\BailleurControllers', 'listPaiements'],
         '/bailleur/messages' => ['controllers\BailleurControllers', 'listMessages'],
 
         //client routes
+        '/client' => ['controllers\ClientControllers', 'login'],
+        '/client/inscription' => ['controllers\ClientControllers', 'register'],
+        '/client/logout' => ['controllers\ClientControllers', 'logout'],
         '/client/dashboard' => ['controllers\ClientControllers', 'dashboard'],
         '/client/locations' => ['controllers\ClientControllers', 'listLocations'],
         '/client/paiements' => ['controllers\ClientControllers', 'listPaiements'],
         '/client/messages' => ['controllers\ClientControllers', 'listMessages'],
 
         //manager routes
+        '/manager' => ['controllers\ManagerControllers', 'login'],
+        '/manager/inscription' => ['controllers\ManagerControllers', 'register'],
+        '/manager/logout' => ['controllers\ManagerControllers', 'logout'],
         '/manager/dashboard' => ['controllers\ManagerControllers', 'dashboard'],
         '/manager/clients' => ['controllers\ManagerControllers', 'listClients'],
         '/manager/biens' => ['controllers\ManagerControllers', 'listBiens'],
