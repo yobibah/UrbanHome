@@ -14,6 +14,21 @@ class Router {
         '/bailleur' => ['controllers\HomeControllers', 'connexion_baileur'],
         '/inscription' => ['controllers\HomeControllers', 'connexion_bail'],
         '/connexion' => ['controllers\HomeControllers', 'connexion_bail'],
+        '/bailleur/dashboard' => ['controllers\BailleurControllers', 'dashboard'],
+        '/bailleur/biens' => ['controllers\BailleurControllers', 'listBiens'],
+        '/bailleur/contrats' => ['controllers\BailleurControllers', 'listContrats'],
+        '/bailleur/paiements' => ['controllers\BailleurControllers', 'listPaiements'],
+        '/bailleur/messages' => ['controllers\BailleurControllers', 'listMessages'],
+        '/client/dashboard' => ['controllers\ClientControllers', 'dashboard'],
+        '/client/locations' => ['controllers\ClientControllers', 'listLocations'],
+        '/client/paiements' => ['controllers\ClientControllers', 'listPaiements'],
+        '/client/messages' => ['controllers\ClientControllers', 'listMessages'],
+        '/manager/dashboard' => ['controllers\ManagerControllers', 'dashboard'],
+        '/manager/clients' => ['controllers\ManagerControllers', 'listClients'],
+        '/manager/biens' => ['controllers\ManagerControllers', 'listBiens'],
+        '/manager/contrats' => ['controllers\ManagerControllers', 'listContrats'],
+        '/manager/paiements' => ['controllers\ManagerControllers', 'listPaiements'],
+        '/manager/messages' => ['controllers\ManagerControllers', 'listMessages'],
     ];
 
     public function register(string $path, callable|array $action): void {
