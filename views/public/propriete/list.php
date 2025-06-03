@@ -18,7 +18,7 @@
                     <p class="text-gray-700 text-sm mb-2"><?= substr($propriete['objet']->getDescription(), 0, 100) ?>...</p>
                     <p class="text-gray-500 text-sm mb-1">Mise en : <span class="font-medium"><?= $propriete['objet']->getOpt() ?></span></p>
                     <p class="text-gray-500 text-sm mb-4">Type : <span class="font-medium"><?= $propriete['type']->getlibele() ?></span></p>
-
+                    <p class="text-gray-500 text-sm mb-4">Etat : <span class="font-medium"><?= $propriete['objet']->getEtat() ?></span></p>
                     <!-- Bouton -->
                     <a href="/detail?id=<?= base64_encode($propriete['id']) ?>" class="inline-block bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 text-sm font-medium transition">
                         Voir plus

@@ -7,6 +7,7 @@ use src\App;
 use routes\Router;
 use controllers\HomeControllers;
 use controllers\BailleurControllers;
+use controllers\ClientControllers;
 
 App::init();
 // Gestion du chemin des assets pour test local (sans -t public) ou production
@@ -21,15 +22,31 @@ if (php_sapi_name() === 'cli-server' && basename(__DIR__) !== 'public') {
 define('VIEW_PATH', realpath(__DIR__ . '/../views/') . DIRECTORY_SEPARATOR);
 
 $router = new Router();
+// point d'entrée pour les routes
 $router->register('/', ['controllers\HomeControllers', 'home']);
+
+//espaces bailleur
 $router->register('/propriete', ['controllers\HomeControllers', 'listes_prorpietes_home']);
 $router->register('/register', ['controllers\BailleurControllers', 'register']);
 $router->register('/add', ['controllers\BailleurControllers', 'add']);
+$router->register('/mes-proprietes', ['controllers\BailleurControllers', 'mes_propietes']);
+$router->register('/Mon-profil', ['controllers\BailleurControllers', 'profile']);
+$router->register('/modifier-propriete', ['controllers\BailleurControllers', 'modifier_propriete']);
+$router->register('/modifier', ['controllers\BailleurControllers', 'update_propriete']);
+$router->register('/detail_propriete', ['controllers\BailleurControllers', 'detail']);  
+$router->register('/supprimer-propriete', ['controllers\BailleurControllers', 'supprimer_propriete']);
+$router->register('/logout', ['controllers\BailleurControllers', 'logout']);
 $router->register('/home-bailleur', ['controllers\BailleurControllers', 'login_Bailleur']);
 $router->register('/Nouvelle-Propiete', ['controllers\BailleurControllers', 'NouvellePropiete']);
 $router->register('/bailleur', ['controllers\HomeControllers', 'connexion_baileur']);
 $router->register('/detail', ['controllers\HomeControllers', 'detail']);
 $router->register('/Inscription', ['controllers\HomeControllers', 'connexion_bail']);
+
+//espaces client
+$router->register('/client', ['controllers\HomeControllers', 'connexion_client']);
+$router->register('/Mon-inscription', ['controllers\ClientControllers', 'NouveauClient']);
+$router->register('/se-connecter', ['controllers\ClientControllers', 'LoginClient']);
+$router->register('/inscription-client', ['controllers\HomeControllers', 'inscription_client']);
 try {
     $router->resolve($_SERVER['REQUEST_URI']);
 } catch (Exception $e) {

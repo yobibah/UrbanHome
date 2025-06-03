@@ -5,6 +5,7 @@
         <li><a href="/client">Espace Client</a></li>
         <li><a href="/bailleur">Espace Bailleur</a></li>
         <li><a href="/manager">Espace Manager</a></li>
+       <li><a href="/Agent">Espace Agent</a></li>
         <!-- Ajoute d'autres liens si besoin -->
     </ul>
 </nav>

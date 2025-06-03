@@ -4,16 +4,16 @@ namespace model;
 class Agent{
     private string $nom;
     private string $prenom;
-    private string $email;  
+    private  $email;  
     private string $telephone;
     private string $mot_de_passe;
     
 
-    public function __construct(string $nom, string $prenom, string $email, string $telephone, string $mot_de_passe)
+    public function __construct(string $nom, string $prenom, string $telephone, string $mot_de_passe)
     {
         $this->nom = $nom;
         $this->prenom = $prenom;
-        $this->email = $email;
+   
         $this->telephone = $telephone;
         $this->mot_de_passe = $mot_de_passe;
     }

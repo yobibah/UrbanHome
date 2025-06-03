@@ -33,7 +33,7 @@ class AgentBDD extends Config{
         foreach ($data as $row) {
             $agents[] = [
                 'id' => $row['id_agent'],
-                'objet'=> new Agent($row['nom'], $row['prenom'], $row['email'], $row['telephone'], $row['mot_de_passe']),
+                'objet'=> new Agent($row['nom'], $row['prenom'],  $row['telephone'], $row['mot_de_passe']),
             ];
         }
         return $agents;
@@ -48,7 +48,7 @@ class AgentBDD extends Config{
         foreach ($data as $row) {
             $agents[] = [
                 'id' => $row['id_agent'],
-                'objet'=> new Agent($row['nom'], $row['prenom'], $row['email'], $row['telephone'], $row['mot_de_passe']),
+                'objet'=> new Agent($row['nom'], $row['prenom'], $row['telephone'], $row['mot_de_passe']),
             ];
         }
         return $agents;
@@ -64,7 +64,7 @@ class AgentBDD extends Config{
         foreach ($data as $row) {
             $agents[] = [
                 'id' => $row['id_agent'],
-                'objet'=> new Agent($row['nom'], $row['prenom'], $row['email'], $row['telephone'], $row['mot_de_passe']),
+                'objet'=> new Agent($row['nom'], $row['prenom'],  $row['telephone'], $row['mot_de_passe']),
             ];
         }
         return $agents;
@@ -78,7 +78,7 @@ class AgentBDD extends Config{
         foreach ($data as $row) {
             $agents[] = [
                 'id' => $row['id_agent'],
-                'objet'=> new Agent($row['nom'], $row['prenom'], $row['email'], $row['telephone'], $row['mot_de_passe']),
+                'objet'=> new Agent($row['nom'], $row['prenom'],  $row['telephone'], $row['mot_de_passe']),
             ];
         }
         return $agents;
@@ -94,10 +94,12 @@ class AgentBDD extends Config{
         foreach ($data as $row) {
             $agents[] = [
                 'id' => $row['id_agent'],
-                'objet'=> new Agent($row['nom'], $row['prenom'], $row['email'], $row['telephone'], $row['mot_de_passe']),
+                'objet'=> new Agent($row['nom'], $row['prenom'],  $row['telephone'], $row['mot_de_passe']),
             ];
         }
         return $agents;
     }
+
+
     
 }

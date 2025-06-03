@@ -39,10 +39,10 @@ class clientBDD extends Client
     }
 
     // function pour recuperer un client par son email
-    public function getClientByEmail(string $email)
+    public function getClientTelephone(string $telephone)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE email = ?");
-        $stmt->execute([$email]);
+        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE telephone = ?");
+        $stmt->execute([$telephone]);
         //$row = $stmt->fetch(PDO::FETCH_ASSOC);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -126,25 +126,25 @@ class clientBDD extends Client
     }
 
     // foction pour se connecter
-    public function LoginClient($email, $password)
+    public function LoginClient($telephone, $password)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE email = ? AND mot_de_passe = ?");
-        $stmt->execute([$email, $password]);
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $clients = [];
-
-        foreach ($data as $row) {
-            $clients[] = [
-                'id' => $row['id_client'],
-                'objet' => new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']),
-
+    $stmt = $this->pdo->prepare("SELECT * FROM client WHERE telephone = :telephone");
+    $stmt->execute([':telephone'=>$telephone]);
+    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($row as $data) {
+        if (password_verify($password, $data['mot_de_passe'])) {
+            return [
+                'id' => $data['id_client'],
+                'objet' => new Client($data['nom'], $data['prenom'], $data['adresse'], $data['email'], $data['telephone'], $data['mot_de_passe'], $data['id_agent']),
             ];
         }
-        return $clients;
-
-
+}
+        return null; // Si aucun client trouvé ou mot de passe incorrect
     }
+    
+
+
+      
 
     // function pour acheter une propriete
     public function acheterPropriete(Achat $achat): bool

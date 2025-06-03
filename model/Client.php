@@ -13,7 +13,7 @@ Class Client  {
     private $adresse;
 
 
-    public function __construct(string $nom, string $prenom, string $adresse, string $email, $numero_telephone, $mot_de_passe,$id_agent)
+    public function __construct(string $nom, string $prenom, $adresse ,string $email, $numero_telephone, $mot_de_passe,$id_agent)
     {
         $this->nom = $nom;
         $this->prenom = $prenom;
@@ -22,6 +22,7 @@ Class Client  {
         $this->numero_telephone = $numero_telephone;
         $this->id_agent = $id_agent;
         $this->adresse = $adresse;
+       
     }
 
      public  function getNom(): string

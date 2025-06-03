@@ -31,4 +31,14 @@ class TypepropieteBDD extends Typepropiete{
         }
         return $typeproprietes;
     }
+    public function getTypepropieteById(int $id){
+        $stmt = $this->pdo->prepare("SELECT * FROM type_propriete WHERE id_type = :id");
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($data) {
+            return new Typepropiete($data['libelle']);
+        }
+        return null;
+    }
 }

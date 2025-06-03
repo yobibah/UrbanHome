@@ -2,6 +2,7 @@
 namespace model;
 use  model\Propriete;
 use config\Config;
+use PDO;
 
 class ProprieteBDD extends Propriete{
     private $pdo;
@@ -90,49 +91,60 @@ class ProprieteBDD extends Propriete{
         }
         return $proprietes;
     }
+// cette fonction permet de modifier les proprietes
 
-    public function updatePropriete($id,$type,$etat,$adresse,$prix,$image1,$image2,$image3,$description): bool
-    {
-        $stmt = $this->pdo->prepare("UPDATE propriete SET type = ?, etat = ?, adresse = ?, prix = ?, image1 = ?, image2 = ?, image3 = ?, description = ? WHERE id_propriete = ?");
-        return $stmt->execute([
-            $type,
-            $etat,
-            $adresse,
-            $prix,
-            $image1,
-            $image2,
-            $image3,
-            $description,
-            $id
-        ]);
-    }
     public function deletePropriete($id): bool
     {
-        $stmt = $this->pdo->prepare("DELETE FROM propriete WHERE id_propriete = ?");
+        $stmt = $this->pdo->prepare("DELETE FROM propriete WHERE id_propiete = ?");
         return $stmt->execute([$id]);
     }
 
+// obtient les proprietes par bailleur
+public function getProprieteByBailleurId($id_bailleur, $limit, $offset)
+{
+    $smt = $this->pdo->prepare("
+        SELECT 
+            p.id_propiete, p.id_type, p.etat, p.opt, p.situation_geo, p.prix,
+            p.image1, p.image2, p.image3, p.descriptions, p.id_bailleur, p.date_ajout,
+            b.nom, b.prenom, b.raison_social, b.adresse, b.email, b.telephone,
+            t.libelle
+        FROM propriete p  
+        INNER JOIN bailleur b ON p.id_bailleur = b.id_bailleur
+        INNER JOIN type_propriete t ON p.id_type = t.id_type
+        WHERE p.id_bailleur = :id_bailleur
+        ORDER BY p.date_ajout DESC
+        LIMIT :limit OFFSET :offset
+    ");
 
-    public function getProprieteByBailleurId($id_bailleur,$limit,$offset)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM propriete WHERE id_bailleur = :id_bailleur 
-        LIMIT :limit OFFSET :ofset");
-      //  $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
-        //$stmt->bindParam(':ofset', $offset, \PDO::PARAM_INT);
-        $stmt->execute([
-            ':limit'=>$limit,
-            ':offset'=>$offset,
-            ':id_bailleur'=>$id_bailleur]);
-        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $proprietes=[];
-        foreach ($data as $row) {
-            $proprietes[] = [
-                'id' => $row['id_propiete'],
-                'objet'=> new Propriete($row['id_type'], $row['etat'], $row['opt'], $row['situation_geo'],$row['prix'], $row['image1'], $row['image2'], $row['image3'], $row['descriptions'],$row['id_bailleur'],$row['date_ajout']),
-            ];
-        }
-        return $proprietes;
+    $smt->bindParam(':id_bailleur', $id_bailleur, \PDO::PARAM_INT);
+    $smt->bindParam(':limit', $limit, \PDO::PARAM_INT);
+    $smt->bindParam(':offset', $offset, \PDO::PARAM_INT);
+
+    $smt->execute();
+    $data = $smt->fetchAll(\PDO::FETCH_ASSOC);
+
+    $proprietes = [];
+    foreach ($data as $row) {
+        $mot = ''; // si mot de passe n'est pas nécessaire ici
+
+        $proprietes[] = [
+            'id' => $row['id_propiete'],
+            'objet' => new Propriete(
+                $row['id_type'], $row['etat'], $row['opt'], $row['situation_geo'],
+                $row['prix'], $row['image1'], $row['image2'], $row['image3'],
+                $row['descriptions'], $row['id_bailleur'], $row['date_ajout']
+            ),
+            'bailleur' => new Bailleur(
+                $row['nom'], $row['prenom'], $row['raison_social'],
+                $row['adresse'], $row['email'], $row['telephone'], $mot
+            ),
+            'type' => new Typepropiete($row['libelle']),
+        ];
     }
+
+    return $proprietes;
+}
+
 
 
     public function propriete_libre($limit,$offset){
@@ -158,17 +170,13 @@ class ProprieteBDD extends Propriete{
 
     
     //nombre de propriete par bailleur 
-    public function getNbProprieteByBailleurId($id){
-        $req="SELECT COUNT(*) FROM propriete WHERE id_bailleur = :id";
-        $stmt = $this->pdo->prepare($req);
-
-        $stmt->execute([
-            ':id'=>$id, \PDO::PARAM_INT,
-        ]);
-        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        return $data;
-    }
+public function getNbProprieteByBailleurId($id_bailleur) {
+    $req = "SELECT COUNT(*) as nb_proprietes FROM propriete WHERE id_bailleur = :id_bailleur";
+    $smt = $this->pdo->prepare($req);
+    $smt->execute(['id_bailleur' => $id_bailleur]);
+    $resultat = $smt->fetch();
+    return $resultat['nb_proprietes'];
+}
 
 
     public function updateEtat($id){
@@ -205,5 +213,51 @@ class ProprieteBDD extends Propriete{
         $stmt = $this->pdo->query("SELECT COUNT(*) FROM propriete WHERE etat = 'libre'");
         return (int)$stmt->fetchColumn();
     }
+
+   
     // pour l'instantj'ai plus d'autres methodes a definir 
+
+    public function nbProprietesVendu($id_bailleur){
+    
+        $req= "SELECT COUNT(*) as nb_ventes FROM achat WHERE id_bailleur = :id_bailleur";
+        $smt= $this->pdo->prepare($req);
+        $smt->bindParam(":id_bailleur",$id_bailleur,\PDO::PARAM_INT);
+        $smt->execute();
+        $data = $smt->fetch(\PDO::FETCH_ASSOC);
+        return $data['nb_ventes'] ?? 0;  
+    }
+
+      public function nbProprietesLouer($id_bailleur){
+        $req= "SELECT COUNT(*) as nb_locataires FROM locations WHERE id_bailleur = :id_bailleur";
+        $smt= $this->pdo->prepare($req);
+        $smt->bindParam(":id_bailleur",$id_bailleur,\PDO::PARAM_INT);
+        $smt->execute();
+        $data = $smt->fetch();
+        return $data['nb_locataires'] ?? 0;  
+    }
+
+    public function UpdateProprieteById($id, Propriete $propriete): bool
+    {
+        $stmt = $this->pdo->prepare("UPDATE propriete SET id_type = :id_type, etat = :etat, opt = :opt, situation_geo = :situation_geo, prix = :prix, image1 = :image1, image2 = :image2, image3 = :image3, descriptions = :descriptions WHERE id_propiete = :id");
+        return $stmt->execute([
+            'id_type' => $propriete->getIdType(),
+            'etat' => $propriete->getEtat(),
+            'opt' => $propriete->getOpt(),
+            'situation_geo' => $propriete->getAdresse(),
+            'prix' => $propriete->getPrix(),
+            'image1' => $propriete->getImage1(),
+            'image2' => $propriete->getImage2(),
+            'image3' => $propriete->getImage3(),
+            'descriptions' => $propriete->getDescription(),
+            'id' => $id
+        ]);
+
+    }
+
+    public function getimagesById($id) {
+        $stmt = $this->pdo->prepare("SELECT image1, image2, image3 FROM propriete WHERE id_propiete = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    }
 }
