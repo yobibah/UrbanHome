@@ -6,6 +6,7 @@ use controllers\HomeControllers;
 class Router {
     private array $routes = [
         '/' => ['controllers\HomeControllers', 'home'],
+        '/home' => ['controllers\HomeControllers', 'home'],
         '/index.php' => ['controllers\HomeControllers', 'home'],
 
         //public routes

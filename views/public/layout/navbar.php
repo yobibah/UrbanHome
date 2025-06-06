@@ -1,4 +1,4 @@
-<nav>
+<nav class="navbar" id="mainNavbar">
     <ul>
         <li><a href="/">Accueil</a></li>
         <li><a href="/public/search">Rechercher</a></li>

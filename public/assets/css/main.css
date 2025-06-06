@@ -1,3 +1,8 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 /* --- Layout type application web --- */
 html, body {
     height: 100%;
@@ -32,6 +37,7 @@ main {
     main {
         padding: 1rem;
     }
+
 }
 
 @media (max-width: 600px) {
@@ -53,14 +59,55 @@ main {
     .home-section h2 {
         font-size: 1.1rem;
     }
+    .navbar {
+        display: none;
+    };
+    .burger {
+        display: block;
+        cursor: pointer;
+    }
+    
 }
-
 header, nav, footer {
     background-color: #6c63ff;
     color: #fff;
     padding: 1rem;
 }
-
+header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    background: #6c63ff;
+    padding: 1rem;
+    justify-content: flex-start;
+}
+nav ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logo a{
+    display: flex;
+    flex-direction: row;
+}
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 10px;
+}
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+.logo-text:active {
+    text-decoration: none;
+}
 nav ul {
     list-style: none;
     margin: 0;
@@ -79,7 +126,44 @@ nav a {
 nav a:hover {
     color: #ffb347;
 }
+.burger .active{
+    display: block;
+    cursor: pointer;
+}
+.burger span{
+    width: 30px;
+    height: 3px;
+    gap: 0.5rem;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: all 0.3s;
+    border-radius: 2px;
+}
+.burger .active{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-right: 1rem;
+    z-index: 1001;
+    order: 1;
+}
 
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    margin-left: 2rem;
+}
+
+.navbar.active {
+    display: flex;
+}
 
 footer {
     text-align: center;
@@ -88,5 +172,86 @@ footer {
     margin-top: 2rem;
     /* Pas de position: fixed pour un footer "normal" d'appli web */
     flex-shrink: 0;
+}
+
+.auth {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    order: 3;
+}
+.auth-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c63ff;
+    font-size: 1.3rem;
+}
+.auth-text {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+    .auth-text {
+        font-size: 0.95rem;
+    }
+}
+@media (max-width: 600px) {
+    header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0.7rem;
+    }
+    .burger {
+        display: flex;
+        order: 1;
+        margin-right: 0.7rem;
+    }
+    .logo {
+        order: 2;
+        margin: 0 auto;
+        font-size: 1.3rem;
+        justify-content: center;
+    }
+    .auth {
+        order: 3;
+        margin-left: 0;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .navbar {
+        display: none;
+        flex-direction: column;
+        width:fit-content;
+        background: #6c63ff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        margin-left: 0;
+    }
+    .navbar.active {
+        display: flex;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 0.2rem;
+        width: 100%;
+        align-items: flex-start;
+    }
 }
 

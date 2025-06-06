@@ -3,3 +3,15 @@
 setInterval(function() {
     window.location.reload();
 }, 300000);
+
+// Menu burger responsive
+window.addEventListener('DOMContentLoaded', function() {
+    const burger = document.getElementById('burgerMenu');
+    const nav = document.getElementById('mainNavbar');
+    if (burger && nav) {
+        burger.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            burger.classList.toggle('open');
+        });
+    }
+});
