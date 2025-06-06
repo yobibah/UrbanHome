@@ -26,3 +26,25 @@ window.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Sidebar responsive pour l'espace client
+window.addEventListener('DOMContentLoaded', function() {
+    const sidebarClient = document.getElementById('sidebarClient');
+    const toggleClient = document.getElementById('sidebarToggleClient');
+    if (sidebarClient && toggleClient) {
+        toggleClient.addEventListener('click', function() {
+            sidebarClient.classList.toggle('hidden');
+        });
+    }
+});
+
+// Sidebar responsive pour l'espace manager
+window.addEventListener('DOMContentLoaded', function() {
+    const sidebarManager = document.getElementById('sidebarManager');
+    const toggleManager = document.getElementById('sidebarToggleManager');
+    if (sidebarManager && toggleManager) {
+        toggleManager.addEventListener('click', function() {
+            sidebarManager.classList.toggle('hidden');
+        });
+    }
+});
