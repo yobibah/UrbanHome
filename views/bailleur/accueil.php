@@ -7,7 +7,7 @@
     <title>Dashboard Bailleur</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<?php require_once VIEW_PATH . 'public/layout/header.php'; ?>
+
 <?php require_once VIEW_PATH . '/bailleur/layout/header.php'; ?>
 <body class="bg-gray-100 font-sans">
 

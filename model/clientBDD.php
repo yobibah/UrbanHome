@@ -175,4 +175,104 @@ class clientBDD extends Client
 
     }
 
+
+    public function dejaFavoris($id_client, $id_propriete): bool
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM favoris WHERE id_client = :id_client AND id_propiete = :id_propiete");
+        $stmt->execute([
+            ':id_client' => $id_client,
+            ':id_propiete' => $id_propriete
+        ]);
+        return $stmt->rowCount() > 0; // Retourne true si déjà favorisé, false sinon
+    }   
+
+    public function favoriserPropriete($id_client, $id_propriete, $date_ajout)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO favoris (id_client, id_propiete,date_ajout) VALUES (:id_client, :id_propiete, :date_ajout)");
+        return $stmt->execute([
+            ':id_client' => $id_client,
+            ':id_propiete' => $id_propriete,
+            ':date_ajout' => $date_ajout
+        ]);
+    }
+
+public function getFavorisByClient($id_client, $limit, $offset): array
+{
+    $sql = "
+        SELECT 
+            f.id_favoris,
+            f.id_client,
+            f.id_propiete,
+            f.date_ajout,
+            p.image1,
+            p.prix,
+            t.libelle
+        FROM favoris f
+        JOIN propriete p ON p.id_propiete = f.id_propiete
+        JOIN type_propriete t ON t.id_type = p.id_type
+        WHERE f.id_client = :id_client
+        ORDER BY f.date_ajout DESC
+        LIMIT :limit OFFSET :offset
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+    public function supprimerFavoris($id_client, $favoris): bool
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM favoris WHERE id_client = :id_client AND id_favoris = :id_favoris");
+        return $stmt->execute([
+            ':id_client' => $id_client,
+            ':id_favoris' => $favoris 
+        ]);
+    }
+    public function countFavorisByClient($id_client): int
+{
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM favoris WHERE id_client = :id");
+    $stmt->execute([':id' => $id_client]);
+    return (int) $stmt->fetchColumn();
+}
+
+public function Prendre_rendevez( $id_client, $id_propriete, $date_rendez_vous, $id_statut,$descriptions): bool
+{
+    $stmt = $this->pdo->prepare("INSERT INTO rendezvous (id_client, id_propriete, date_rdv,id_statut,descriptions) VALUES (:id_client, :id_propriete, :date_rdv, :id_statut, :descriptions)");
+    return $stmt->execute([
+        ':id_client' => $id_client,
+        ':id_propriete' => $id_propriete,
+        ':date_rdv' => $date_rendez_vous,
+        ':id_statut' => $id_statut,
+        ':descriptions' => $descriptions
+    ]);
+
+}
+
+public function IdRdv($statut){
+    $stmt = $this->pdo->prepare("SELECT id_statut FROM statut_rendezvous WHERE statut = :statut");
+    $stmt->bindParam(':statut', $statut, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($data) {
+        return $data['id_statut'];
+    }
+    
+    return null; // Si aucun rendez-vous trouvé avec ce statut
+}
+
+public function verifierRendezVous($id_client, $id_propriete): bool {
+    $stmt = $this->pdo->prepare("SELECT * FROM rendezvous WHERE id_client = :id_client AND id_propriete = :id_propriete ");
+    $stmt->execute([
+        ':id_client' => $id_client,
+        ':id_propriete' => $id_propriete,
+       
+    ]);
+    return $stmt->rowCount() > 0;
+}
 }

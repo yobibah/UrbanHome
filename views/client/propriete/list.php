@@ -1,8 +1,9 @@
 <?php require_once VIEW_PATH . 'public/layout/header.php'; ?>
+<?php require_once VIEW_PATH . 'client/layout/header.php'; ?>
 <script src="https://cdn.tailwindcss.com"></script>
 
 
-
+<div class =>
 <section class="mt-20 px-6">
     <!-- Grille des propriétés -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -29,7 +30,7 @@
     </div>
 </section>
 
-
+</div>
 <?php
     // Variables par défaut si elles ne sont pas déjà définies
     $page = $page ?? 1;

@@ -51,7 +51,7 @@
     </div>
 </section>
 
-
+</div>
 
 
 <?php require_once VIEW_PATH . 'public/layout/footer.php'; ?>

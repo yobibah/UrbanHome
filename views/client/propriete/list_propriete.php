@@ -1,23 +1,26 @@
+<?php require_once VIEW_PATH . 'client/layout/header.php'; ?>
+<script src="https://cdn.tailwindcss.com"></script>
 
-<?php require_once VIEW_PATH . '/bailleur/layout/header.php'; ?>
 
 
-<div class="max-w-7xl mx-auto px-4 pt-12">
-    <a href="/bailleur" class="text-indigo-600 hover:underline mb-6 inline-block">← Retour</a>
-
-    <section>
+<section class="mt-20 px-4">
+    <div class="container mx-auto">
         <!-- Grille des propriétés -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
             <?php foreach ($proprietes as $propriete): ?>
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-                    <!-- Image de la propriété -->
-                    <img src="assets/images/<?= htmlspecialchars($propriete['objet']->getImage1()) ?>" alt="Propriété" class="w-full h-56 object-cover">
-                    
+                    <!-- Image de la propriété (réduite) -->
+                    <img src="assets/images/<?= $propriete['objet']->getImage1() ?>" alt="Propriété"
+                         class="w-full h-32 sm:h-36 md:h-40 lg:h-44 object-cover">
+
                     <!-- Détails de la propriété -->
-                    <div class="p-6">
-                        <h5 class="text-2xl font-semibold text-indigo-600 mb-2">
+                    <div class="p-5">
+                        <h5 class="text-xl font-semibold text-indigo-600 mb-2">
                             <?= number_format($propriete['objet']->getPrix(), 0, ',', ' ') ?> FCFA
                         </h5>
+                        <p class="text-gray-700 text-sm mb-2">
+                            <?= substr($propriete['objet']->getDescription(), 0, 100) ?>...
+                        </p>
                         <p class="text-gray-500 text-sm mb-1">
                             Mise en : <span class="font-medium"><?= $propriete['objet']->getOpt() ?></span>
                         </p>
@@ -25,26 +28,32 @@
                             Type : <span class="font-medium"><?= $propriete['type']->getlibele() ?></span>
                         </p>
                         <p class="text-gray-500 text-sm mb-4">
-                            Etat : <span class="font-medium"><?= $propriete['objet']->getEtat() ?></span>
+                            État : <span class="font-medium"><?= $propriete['objet']->getEtat() ?></span>
                         </p>
-                        
+
                         <!-- Bouton -->
-                        <a href="/detail_propriete?id=<?= base64_encode($propriete['id']) ?>" class="inline-block bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 text-sm font-medium transition">
+                        <a href="/Espace-client/proprietes/detail?id=<?= base64_encode($propriete['id']) ?>"
+                           class="inline-block bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-600 text-sm font-medium transition">
                             Voir plus
                         </a>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
-    </section>
+    </div>
+</section>
 
-    <?php
-        $page = $page ?? 1;
-        $total_pages = $total_pages ?? 1;
-    ?>
 
-    <!-- Pagination -->
-    <div class="flex justify-center mt-12 mb-16">
+
+<?php
+    // Variables par défaut si elles ne sont pas déjà définies
+    $page = $page ?? 1;
+    $total_pages = $total_pages ?? 1;
+?>
+<!-- Pagination fixe en bas -->
+ 
+<div class="w-full mt-auto px-4 py-6 bg-white">
+    <div class="flex justify-center">
         <nav class="inline-flex shadow-sm rounded-md" aria-label="Pagination">
             <!-- Page précédente -->
             <?php if ($page > 1): ?>
@@ -78,3 +87,9 @@
         </nav>
     </div>
 </div>
+
+
+
+
+
+

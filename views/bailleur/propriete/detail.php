@@ -1,4 +1,5 @@
-<?php require_once VIEW_PATH . 'public/layout/headerBailleur.php'; ?>
+
+<?php require_once VIEW_PATH . '/bailleur/layout/header.php'; ?>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <div class="max-w-7xl mx-auto px-4 pt-12">

@@ -72,7 +72,7 @@ class ProprieteBDD extends Propriete{
         return $proprietes;
     }
 
-    public function getProprieteById(int $id)
+    public function getProprieteById($id)
     {
         $stmt = $this->pdo->prepare("SELECT *, t.libelle 
         FROM propriete 

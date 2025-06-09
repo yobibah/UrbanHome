@@ -1,15 +1,8 @@
 <?php require_once VIEW_PATH . 'public/layout/header.php'; ?>
-<!DOCTYPE html>
-<html lang="fr">
+<script src="https://cdn.tailwindcss.com"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion Client</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white shadow-md rounded-2xl px-8 pt-10 pb-8 w-full max-w-md">
         <h2 class="text-2xl font-bold text-blue-600 text-center mb-6">Connexion Client</h2>
 
@@ -35,12 +28,9 @@
         <div class="text-center mt-6">
             <p class="text-sm text-gray-600">pas de compte ?
                 <a href="/inscription-client" class="text-blue-600 hover:underline font-medium">
-                    S'inscrire en tant que Client
+                    S'inscrire 
                 </a>
             </p>
         </div>
     </div>
-
-</body>
-
-</html>
+</div>

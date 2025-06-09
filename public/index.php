@@ -45,7 +45,17 @@ $router->register('/Inscription', ['controllers\HomeControllers', 'connexion_bai
 //espaces client
 $router->register('/client', ['controllers\HomeControllers', 'connexion_client']);
 $router->register('/Mon-inscription', ['controllers\ClientControllers', 'NouveauClient']);
+$router->register('/Espace-client/proprietes/detail', ['controllers\ClientControllers', 'detail_propriete']);
 $router->register('/se-connecter', ['controllers\ClientControllers', 'LoginClient']);
+$router->register('/listes-proprietes', ['controllers\ClientControllers', 'proprietes']);
+$router->register('/ajouter-favoris', ['controllers\ClientControllers', 'add_favoris']);
+$router->register('/tableau-de-bord', ['controllers\ClientControllers', 'dash']);
+$router->register('/supprimer-favoris', ['controllers\ClientControllers', 'supprimer_favoris']);
+$router->register('/Espace-client/proprietes/rdv/add', ['controllers\ClientControllers', 'PrendreRendezVous']);
+$router->register('/rendez-vous', ['controllers\ClientControllers', 'rdv']);
+$router->register('/propriete/mes-proprietes-favoris', ['controllers\ClientControllers', 'list_favoris']);
+$router->register('/mon-profil', ['controllers\ClientControllers', 'mon_profil']);
+$router->register('/modifier-mon-profil', ['controllers\ClientControllers', 'modifier_profil']);
 $router->register('/inscription-client', ['controllers\HomeControllers', 'inscription_client']);
 try {
     $router->resolve($_SERVER['REQUEST_URI']);

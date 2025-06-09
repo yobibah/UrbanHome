@@ -1,8 +1,3 @@
-<?php
-header("Cache-Control: no-store, no-cache, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
-?>
 <?php require_once VIEW_PATH . '/bailleur/layout/header.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
