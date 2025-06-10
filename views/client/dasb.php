@@ -1,35 +1,40 @@
 <script src="https://cdn.tailwindcss.com"></script>
-
+<?php require_once VIEW_PATH . 'client/layout/header.php'; ?>
 <div class="flex min-h-screen">
 
   <!-- Contenu principal -->
   <main class="flex-1 p-10">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">Bienvenue sur votre Dashboard, <?= htmlspecialchars($prenom) ?> 👋</h1>
+     <header class="mb-6">
+                    <h1 class="text-3xl font-bold mb-6 text-white-800">Bienvenue sur votre Dashboard, <strong><?= isset($_SESSION['prenom_client']) ? htmlspecialchars($_SESSION['prenom_client'].' '.$_SESSION['nom_client'] ): ''  ?> </strong>👋</h1>
+                <p class="text-gray-100">Voici votre tableau de bord.</p>
+            </header>
+
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
       <!-- Mes propriétés -->
       <a href="/mes-proprietes" class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition duration-200">
-        <h2 class="text-lg font-semibold text-gray-700">Mes propriétés</h2>
-        <p class="text-3xl font-bold text-blue-600 mt-2"><?= $nombreProprietes ?></p>
+        <h2 class="text-lg font-semibold text-gray-700">Mes propriétés louees | achetees</h2>
+        <p class="text-3xl font-bold text-blue-600 mt-2"><?= isset($nbr_proprietes_louer)? htmlspecialchars($nbr_proprietes_louer ): 0 ?> | <?= isset($nbr_proprietes_achete)? htmlspecialchars($nbr_proprietes_achete ): 0 ?></p>
         <p class="text-sm text-gray-500 mt-2">Voir mes annonces publiées</p>
-      </a>
+      </a> 
 
       <!-- Mes rendez-vous -->
       <a href="/mes-rendez-vous" class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition duration-200">
         <h2 class="text-lg font-semibold text-gray-700">Rendez-vous à venir</h2>
-        <p class="text-3xl font-bold text-green-600 mt-2"><?= $rdvAvenir ?></p>
+        <p class="text-3xl font-bold text-green-600 mt-2"><?= isset($rdvAvenir)?$rdvAvenir :0?></p>
         <p class="text-sm text-gray-500 mt-2">Voir le planning</p>
       </a>
 
       <!-- Mes favoris -->
       <a href="/propriete/mes-proprietes-favoris" class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition duration-200">
         <h2 class="text-lg font-semibold text-gray-700">Favoris</h2>
-        <p class="text-3xl font-bold text-pink-600 mt-2"><?= $favoris ?></p>
+        <p class="text-3xl font-bold text-pink-600 mt-2"><?= isset($nombreFavoris) ?  $nombreFavoris :0 ?></p>
         <p class="text-sm text-gray-500 mt-2">Voir les biens enregistrés</p>
       </a>
 
     </div>
+  
   </main>
 </div>
 

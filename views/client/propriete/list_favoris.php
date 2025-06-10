@@ -1,5 +1,6 @@
 <?php require_once VIEW_PATH . 'client/layout/header.php'; ?>
 
+
 <div>
     <a href="/client" class="text-blue-600 hover:underline ml-4 mt-4 inline-block">← Retour</a>
 </div>
@@ -29,7 +30,8 @@
                             <a href="/Espace-client/proprietes/detail?id=<?= base64_encode($fav['id_propiete']) ?>" class="text-blue-600 hover:underline text-sm">
                                 Voir la propriété
                             </a>
-                            <a href="/supprimer-favoris?id=<?=base64_encode($fav['id_favoris']) ?>" class="text-red-600 hover:underline text-sm">
+                            <?php isset($fav['id_favoris']) ? $_SESSION['id_favoris']= $fav['id_favoris'] : null ?>
+                            <a href="/supprimer-favoris" class="text-red-600 hover:underline text-sm">
                                 Supprimer
                             </a>
                         </div>
@@ -88,4 +90,3 @@
 </div>
 </div>
 
-<?php require_once VIEW_PATH . 'client/layout/footer.php'; ?>

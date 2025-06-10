@@ -1,0 +1,23 @@
+{
+  "name": "urbanhome",
+  "version": "1.0.0",
+  "description": "UrbanHome est une application web de gestion immobilière basée sur le modèle MVC (Modèle-Vue-Contrôleur).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yobibah/UrbanHome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yobibah/UrbanHome/issues"
+  },
+  "homepage": "https://github.com/yobibah/UrbanHome#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.1.8"
+  }
+}

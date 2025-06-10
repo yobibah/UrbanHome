@@ -1,5 +1,5 @@
     <script src="https://cdn.tailwindcss.com"></script>
-    <?php isset($_SESSION['id']) ? $encodedId = base64_encode($_SESSION['id']) : null ?>
+    <?php isset($_SESSION['id_client']) ? $encodedId = base64_encode($_SESSION['id_client']) : null ?>
     <!-- Sidebar -->
     <div class="flex min-h-screen">
       <aside class="w-64 bg-blue-700 text-white p-6 space-y-6">
@@ -7,12 +7,12 @@
         <nav class="space-y-2">
           <a href="/tableau-de-bord" class="block px-4 py-2 rounded hover:bg-blue-600">Tableau de bord</a>
 
-          <a href="/mes-proprietes" class="block px-4 py-2 rounded hover:bg-blue-600">Locations | Achats</a>
+          <a href="/client" class="block px-4 py-2 rounded hover:bg-blue-600">Locations | Achats</a>
 
-       
+
           <a href="/listes-proprietes" class="block px-4 py-2 rounded hover:bg-blue-600"> Voir Proprietes</a>
           <a href="/propriete/mes-proprietes-favoris" class="block px-4 py-2 rounded hover:bg-blue-600"> Favoris</a>
-          <a href="Mon-profil?id=<?= isset($encodedId) ? $encodedId : null ?>" class="block px-4 py-2 rounded hover:bg-blue-600">Profil</a>
+          <a href="mon-profil" class="block px-4 py-2 rounded hover:bg-blue-600">Profil</a>
           <a href="#"
             onclick="openLogoutModal()"
             class="block px-4 py-2 rounded hover:bg-red-600 text-red-200">
@@ -27,7 +27,7 @@
                 <button onclick="closeLogoutModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
                   Annuler
                 </button>
-                <a href="/logout" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                <a href="/me-deconnecter" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
                   Se déconnecter
                 </a>
               </div>
