@@ -17,7 +17,7 @@ class HomeControllers extends Controllers{
         $bannieres = new ProprieteBDD(); // ou autre classe dédiée aux bannières
        $bannieres = $bannieres->getBannieresAccueil(); 
            
-           $nb_ventes = $ProprieteBDD->nbProprietesVendu($_SESSION['id']);
+           $nb_ventes = $ProprieteBDD->nbProprietesVendu(isset($_SESSION['id']) ? $_SESSION['id'] : null);
                 $_SESSION['nb_ventes'] = $nb_ventes;
         if($proprietes){
             $this->render('public/home', ['proprietes' => $proprietes, 'bannieres' => $bannieres,'nb_ventes'=>$nb_ventes]);
