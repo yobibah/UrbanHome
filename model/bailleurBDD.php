@@ -128,6 +128,23 @@ public function loginBailleur($email, $password)
 }
 
 
+   public function listes_rdv($id_bailleur){
+        $sql= "SELECT c.nom,c.prenom,c.telephone,p.id_propiete,r.date_rdv,r.heur_rdv,s.statut 
+        FROM rdv r
+        INNER JOIN client c ON r.id_client=c.id
+        INNER JOIN statut s ON r.id_statut=s.id
+        INNER JOIN propriete p ON r.id_proprie=p.id_proprie
+        INNER JOIN bailleur b ON p.id_bailleur=b.id_bailleur
+        WHERE p.id_bailleur=:id_bailleur
+        ORDER BY r.date_rdv DESC";
+
+        $smt = $this->pdo->prepare($sql);
+        $smt->execute([':id_bailleur' => $id_bailleur]);
+        return $smt->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
+    
     public function verifierEmail($email)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM bailleur WHERE email = ?");

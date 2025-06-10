@@ -98,6 +98,11 @@ class ClientControllers extends Controllers
                 $proprietes = $proprieteB->getAlldataforpropriete($limit, $ofset);
 
             if ($client) {
+                 $clientBDD = new clientBDD();
+           $id_client = $_SESSION['id_client'];
+
+        // Récupérer le nombre de favoris
+           $nombreFavoris = $clientBDD->nbres_favoris($id_client);
                 $_SESSION['id_client'] = $client['id'];
                 $_SESSION['nom_client'] = $client['objet']->getNom();
                 $_SESSION['prenom_client'] = $client['objet']->getPrenom();
@@ -106,9 +111,9 @@ class ClientControllers extends Controllers
                 $_SESSION['adresse_client'] = $client['objet']->getAdresse();
                
                // ou autre classe dédiée aux bannières
-        
-             
-                    $this->render('client/accueil', ['proprietes' => $proprietes, 'bannieres' => $bannieres,]);
+
+
+                    $this->render('client/accueil', ['proprietes' => $proprietes, 'bannieres' => $bannieres, 'nombre_favoris' => $nombreFavoris]);
 
                 
                 
@@ -128,7 +133,16 @@ class ClientControllers extends Controllers
     public function dash(){
         if (isset($_SESSION['id_client'])) {
             // Si l'utilisateur est déjà connecté, redirige vers la page d'accueil
-            $this->render("client/dasb");
+                   $clientBDD = new clientBDD();
+                   $nombreFavoris = $clientBDD->nbres_favoris($_SESSION['id_client']);
+                   $nbr_proprietes_louer = $clientBDD->nbr_louer();
+                  $rdvAvenir = $clientBDD->nbr_rdv($_SESSION['id_client']);
+
+            $this->render("client/dasb", [
+                'nombreFavoris' => $nombreFavoris,
+                'nbr_proprietes_louer' => $nbr_proprietes_louer,
+                'rdvAvenir' => $rdvAvenir
+            ]);
             exit;
         } else {
             // Sinon, redirige vers la page de connexion
@@ -142,6 +156,7 @@ class ClientControllers extends Controllers
         $proprietes = $propriete->getProprieteById($id);
 
         if($proprietes){
+        
             $this->render('client/propriete/detail', ['proprietes' => $proprietes]);
         }
         else{
@@ -151,7 +166,7 @@ class ClientControllers extends Controllers
 
 
     public function proprietes(){
-        $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+    $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
     $limit = 6;
     $offset = ($page - 1) * $limit;
     $propriete = new ProprieteBDD();
@@ -283,10 +298,10 @@ public function PrendreRendezVous(){
         $descriptions = htmlspecialchars(trim($_POST['descriptions']));
 
         // Convertir la date et l'heure en un format compatible avec la base de données
-        $date_rdv = date('Y-m-d H:i:s', strtotime("$date_rendez_vous $heure_rendez_vous"));
-        $aujourd = date('Y-m-d H:i:s');
+        
+        $aujourd = date('Y-m-d');
         // Vérifier si la date du rendez-vous est dans le futur
-        if (strtotime($date_rdv) < strtotime($aujourd)) {
+        if (strtotime($date_rendez_vous) < strtotime($aujourd)) {
             $_SESSION['msg'] = "La date du rendez-vous ne peut pas être dans le passé.";
             $this->render('client/propriete/rdv/add', ['msg' => $_SESSION['msg']]);
             return;
@@ -308,7 +323,7 @@ public function PrendreRendezVous(){
                 return;
             }
 
-            if ($clientBDD->Prendre_rendevez($id_client, $id_propriete, $date_rdv, $id_statut, $descriptions)) {
+            if ($clientBDD->Prendre_rendevez($id_client, $id_propriete, $date_rendez_vous,$heure_rendez_vous, $id_statut, $descriptions)) {
                 $_SESSION['msg'] = "Rendez-vous pris avec succès.";
                 $this->render('client/propriete/rdv/add', ['msg' => $_SESSION['msg']]);
             } else {
@@ -322,6 +337,79 @@ public function PrendreRendezVous(){
     }
 }
 
+
+    public function ListeRendezVous()
+    {
+        if (empty($_SESSION['id_client'])) {
+            $_SESSION['msg'] = "Veuillez vous connecter pour voir vos rendez-vous.";
+            $this->render('client/auth/connexion', ['msg' => $_SESSION['msg']]);
+            return;
+        }
+
+        $clientBDD = new clientBDD();
+        $id_client = $_SESSION['id_client'];
+
+        // Pagination
+        $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $perPage     = 10;
+        $offset      = ($currentPage - 1) * $perPage;
+ /*
+        // Total
+        $totalRendezVous = $clientBDD->countRendezVousByClient($id_client);
+        $totalPages     = ceil($totalRendezVous / $perPage);
+*/
+        // Rendez-vous paginés
+        $rdvs = $clientBDD->listes_rdvs($id_client, $perPage, $offset);
+
+        $this->render('client/propriete/rdv/list', [
+            'rdvs' => $rdvs,
+            'currentPage' => $currentPage,
+            
+        ]);
+    }
+
+
+    public function mon_profil()
+    {
+        if (empty($_SESSION['id_client'])) {
+            $_SESSION['msg'] = "Veuillez vous connecter pour voir votre profil.";
+            $this->render('client/auth/connexion', ['msg' => $_SESSION['msg']]);
+            return;
+        }
+
+        $clientBDD = new clientBDD();
+        $id_client = $_SESSION['id_client'];
+        $client = $clientBDD->getClientById($id_client);
+
+        if ($client) {
+            $this->render('client/profile/vue', ['client' => $client]);
+        } else {
+            $_SESSION['msg'] = "Client non trouvé.";
+            $this->render('error/404', ['msg' => $_SESSION['msg']]);
+        }
+    }
+
+    public function sup_rdv(){
+        if(isset($_SESSION['id_client'])){
+                $clientBDD = new clientBDD();
+                $id= $_SESSION['id_client'];
+                $id_rdv = $_SESSION['id_rdv'];
+                $clientBDD = new clientBDD();
+             if($clientBDD->supprimerRdv($id_rdv,$id)){
+                $_SESSION['msg']="Rendez-vous supprimé avec succès";
+                $this->redirect('mes-rendez-vous');
+                exit;
+             }else{
+                $_SESSION['msg']="Erreur lors de la suppression du rendez-vous";
+                 $this->redirect('mes-rendez-vous');
+
+                exit;
+             }
+                
+            }
+        
+    }
+
     public function LogoutClient()
     {
         // Détruire la session pour déconnecter l'utilisateur
@@ -329,7 +417,7 @@ public function PrendreRendezVous(){
         session_destroy();
         
         // Rediriger vers la page de connexion ou d'accueil
-        $this->render(" client/auth/connexion");
+        $this->render('client/auth/connexion', ['msg' => "Vous avez été déconnecté avec succès."]);
         exit;
     }
 

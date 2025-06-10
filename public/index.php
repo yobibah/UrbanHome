@@ -50,11 +50,15 @@ $router->register('/se-connecter', ['controllers\ClientControllers', 'LoginClien
 $router->register('/listes-proprietes', ['controllers\ClientControllers', 'proprietes']);
 $router->register('/ajouter-favoris', ['controllers\ClientControllers', 'add_favoris']);
 $router->register('/tableau-de-bord', ['controllers\ClientControllers', 'dash']);
+$router->register('/mes-rendez-vous', ['controllers\ClientControllers', 'ListeRendezVous']);
 $router->register('/supprimer-favoris', ['controllers\ClientControllers', 'supprimer_favoris']);
 $router->register('/Espace-client/proprietes/rdv/add', ['controllers\ClientControllers', 'PrendreRendezVous']);
 $router->register('/rendez-vous', ['controllers\ClientControllers', 'rdv']);
 $router->register('/propriete/mes-proprietes-favoris', ['controllers\ClientControllers', 'list_favoris']);
 $router->register('/mon-profil', ['controllers\ClientControllers', 'mon_profil']);
+$router->register('/me-deconnecter', ['controllers\ClientControllers', 'LogoutClient']);
+$router->register('/modifier-mes-rendez-vous', ['controllers\ClientControllers', 'modifier_rdv']);
+$router->register('/Annuler-mon-rendez-vous', ['controllers\ClientControllers', 'sup_rdv']  );   
 $router->register('/modifier-mon-profil', ['controllers\ClientControllers', 'modifier_profil']);
 $router->register('/inscription-client', ['controllers\HomeControllers', 'inscription_client']);
 try {

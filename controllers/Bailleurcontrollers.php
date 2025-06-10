@@ -449,8 +449,14 @@ public function mes_propietes()
             $this->render('bailleur/propriete/add');
         }
     }
+    public function mes_rdv(){
+        if(isset($_SESSION['id'])){
+            $rdv = new BailleurBDD();
+        }
+    }
 
 
+ 
     public function logout()
     {
 

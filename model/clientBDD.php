@@ -60,7 +60,7 @@ class clientBDD extends Client
     // function pour recuperer un client par son id
     public function getClientById(int $id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id = ?");
+        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id_client = ?");
         $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -69,7 +69,7 @@ class clientBDD extends Client
         foreach ($data as $row) {
             $clients[] = [
                 'id' => $row['id_client'],
-                'objet' => new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['numero_telephone'], $row['motd_de_passe'], $row['id_agent']),
+                'objet' => new Client($row['nom'], $row['prenom'], $row['adresse'], $row['email'], $row['telephone'], $row['mot_de_passe'], $row['id_agent']),
 
             ];
         }
@@ -240,13 +240,14 @@ public function getFavorisByClient($id_client, $limit, $offset): array
     return (int) $stmt->fetchColumn();
 }
 
-public function Prendre_rendevez( $id_client, $id_propriete, $date_rendez_vous, $id_statut,$descriptions): bool
+public function Prendre_rendevez( $id_client, $id_propriete, $date_rendez_vous, $heur_rdv, $id_statut,$descriptions): bool
 {
-    $stmt = $this->pdo->prepare("INSERT INTO rendezvous (id_client, id_propriete, date_rdv,id_statut,descriptions) VALUES (:id_client, :id_propriete, :date_rdv, :id_statut, :descriptions)");
+    $stmt = $this->pdo->prepare("INSERT INTO rendezvous (id_client, id_propriete, date_rdv,heur_rdv,id_statut,descriptions) VALUES (:id_client, :id_propriete, :date_rdv,:heur_rdv, :id_statut, :descriptions)");
     return $stmt->execute([
         ':id_client' => $id_client,
         ':id_propriete' => $id_propriete,
         ':date_rdv' => $date_rendez_vous,
+        ':heur_rdv' => $heur_rdv,
         ':id_statut' => $id_statut,
         ':descriptions' => $descriptions
     ]);
@@ -275,4 +276,73 @@ public function verifierRendezVous($id_client, $id_propriete): bool {
     ]);
     return $stmt->rowCount() > 0;
 }
+public function listes_rdvs($id_client,$limit,$offset){
+    $sql= "SELECT r.id_rdv ,r.id_client, r.id_propriete, r.date_rdv,r.id_statut,r.descriptions,r.heur_rdv,sr.statut,b.raison_social
+    FROM rendezvous r
+    JOIN statut_rendezvous sr
+    on r.id_statut = sr.id_statut
+    join propriete p 
+    on p.id_propiete = r.id_propriete
+    join bailleur b 
+    on b.id_bailleur= p.id_bailleur
+    WHERE r.id_client = :id_client
+    ORDER BY r.date_rdv DESC
+    LIMIT :limit
+    OFFSET :offset
+    ";
+    $stmt=$this->pdo->prepare($sql);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindValue(':id_client',$id_client);
+   
+    $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+public function nbres_favoris($id){
+    $sql = "SELECT COUNT(*) as total FROM favoris WHERE id_client = :id_client";    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':id_client', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
+
+public function nbr_louer(){
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as total FROM locations WHERE id_client = :id_client");
+    $stmt->bindValue(':id_client', $_SESSION['id_client'], PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
+
+public function nbr_acheter($id){
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as total FROM achat WHERE id_client = :id_client");
+    $stmt->bindValue(':id_client', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
+
+public function nbr_rdv($id){
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as total FROM rendezvous WHERE id_client = :id_client");
+    $stmt->bindValue(':id_client', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+
+}
+
+public function supprimerRdv($id_rdv, $id_client){
+    $sql = "DELETE FROM rendezvous WHERE id_rdv= :id_rdv AND id_client = :id_client";
+    $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([
+        'id_rdv' => $id_rdv,
+        'id_client' => $id_client
+    ]);
+    
+}
+
+
 }
