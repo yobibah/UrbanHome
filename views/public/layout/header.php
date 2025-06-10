@@ -10,4 +10,7 @@
     <script src="<?= ASSET_PATH ?>js/main.js" defer></script>
 </head>
 <body>
+    <header>
+        <div class="burger"><span></span><span></span><span></span></div>
+    </header>
 <?php include __DIR__ . '/navbar.php'; ?>

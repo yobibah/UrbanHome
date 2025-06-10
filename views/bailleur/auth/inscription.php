@@ -107,7 +107,11 @@
 
         <p class="mt-6 text-center text-sm text-gray-600">
             Vous avez déjà un compte ?
+<<<<<<< HEAD
             <a href="/bailleur" class="text-blue-600 hover:underline font-medium">Se connecter</a>
+=======
+            <a href="/bailleur" class="text-green-600 hover:underline">Se connecter</a>
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3
         </p>
     </div>
 </div>

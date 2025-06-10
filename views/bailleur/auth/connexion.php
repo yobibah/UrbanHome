@@ -31,7 +31,11 @@
     <div class="w-full max-w-xl bg-white shadow-lg rounded-2xl px-8 pt-10 pb-8">
         <h2 class="text-2xl font-bold text-blue-600 text-center mb-8">Connexion Bailleur</h2>
 
+<<<<<<< HEAD
         <form method="POST" action="/home-bailleur" class="space-y-5">
+=======
+        <form method="POST" action="/bailleur" class="space-y-6">
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3
             <div>
                 <label for="email" class="block text-gray-700 font-medium text-sm">Email</label>
                 <input type="email" name="email" id="email" required
@@ -52,7 +56,11 @@
 
         <p class="mt-6 text-center text-sm text-gray-600">
             Vous n'avez pas de compte ? 
+<<<<<<< HEAD
             <a href="/Inscription" class="text-blue-600 hover:underline font-medium">S'inscrire</a>
+=======
+            <a href="/bailleur/inscription" class="text-green-600 hover:underline">S'inscrire</a>
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3
         </p>
     </div>
 </div>

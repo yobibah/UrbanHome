@@ -9,14 +9,14 @@
             <div class="grid grid-cols-3 gap-4">
                 <!-- Image principale (grande à gauche) -->
                 <div class="col-span-2">
-                    <img src="assets/images/<?= $propriete['objet']->getImage1() ?>" alt="Image 1"
+                    <img src="<?=ASSET_PATH?>images/<?= $propriete['objet']->getImage1() ?>" alt="Image 1"
                         class="w-full h-96 object-cover rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl">
                 </div>
                 <!-- Deux petites images empilées à droite -->
                 <div class="flex flex-col gap-4">
-                    <img src="assets/images/<?= $propriete['objet']->getImage2() ?>" alt="Image 2"
+                    <img src="<?=ASSET_PATH?>images/<?= $propriete['objet']->getImage2() ?>" alt="Image 2"
                         class="w-full h-44 object-cover rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl">
-                    <img src="assets/images/<?= $propriete['objet']->getImage3() ?>" alt="Image 3"
+                    <img src="<?=ASSET_PATH?>images/<?= $propriete['objet']->getImage3() ?>" alt="Image 3"
                         class="w-full h-44 object-cover rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl">
                 </div>
             </div>
@@ -38,12 +38,16 @@
 
                 <!-- Actions -->
                 <div class="mt-6 flex flex-wrap gap-4">
-                    <a href="/Demande-Visite?id=<?= base64_encode($propriete['id']) ?>"
+                    <a href="/client/propriete/rdv?id=<?= base64_encode($propriete['id']) ?>"
                         class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Demander une visite</a>
+<<<<<<< HEAD:views/public/propriete/detail.php
                     <a href="/propriete"
+=======
+                    <a href="/"
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3:views/propriete/detail.php
                         class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">Retour</a>
-                    <?php if ($_SESSION['id_client']): ?>
-                        <a href="/ajouter-favoris?id=<?= base64_encode($propriete['id']) ?>"
+                    <?php if (isset($_SESSION['id_client'])): ?>
+                        <a href="/client/propriete?id=<?= base64_encode($propriete['id']) ?>"
                             class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Ajouter aux favoris</a>
                     <?php endif; ?>
                 </div>

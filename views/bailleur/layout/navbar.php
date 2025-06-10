@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     <script src="https://cdn.tailwindcss.com"></script>
       <?php $encodedId = base64_encode($_SESSION['id']); ?>
     <!-- Sidebar -->
@@ -45,3 +46,13 @@
     document.getElementById('logoutModal').classList.add('hidden');
   }
 </script>
+=======
+<nav class="space-y-2">
+    <a href="/bailleur/dashboard" class="block px-4 py-2 rounded hover:bg-blue-600">Tableau de bord</a>
+    <a href="/" class="block px-4 py-2 rounded hover:bg-blue-600">acceuil</a>
+    <a href="/bailleur/propriete" class="block px-4 py-2 rounded hover:bg-blue-600">Mes Proprietes</a>
+    <a href="/bailleur/rdv" class="block px-4 py-2 rounded hover:bg-blue-600">Demandes reçues</a>
+    <a href="/bailleur/profile" class="block px-4 py-2 rounded hover:bg-blue-600">Profil</a>
+    <a href="/bailleur/logout" class="block px-4 py-2 rounded hover:bg-red-600 text-red-200">Déconnexion</a>
+</nav>
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3

@@ -294,10 +294,39 @@ public function mes_propietes()
         else{
             $this->render('error/404');
         }
+<<<<<<< HEAD
+=======
+       
+       
+    } else {
+        $this->render('bailleur/auth/inscription');
+    }
+}
+public function home(){
+    if(isset($_SESSION['id'])){
+        $this->render('bailleur/dasbord');
+    }
+    else{
+        $this->render('bailleur/auth/connexion');
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3
     }
     // controller pour afficher les details d'une propriete
 
 
+<<<<<<< HEAD
+=======
+}
+public function logout()
+{
+    // Détruire la session pour déconnecter l'utilisateur
+    session_unset();
+    session_destroy();
+
+    // Rediriger vers la page de connexion ou d'accueil
+    header('Location: /bailleur');
+    exit();
+}
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3
 
     public function supprimer_propriete()
     {

@@ -35,7 +35,11 @@ class HomeControllers extends Controllers{
         $proprietes = $propriete->getProprieteById($id);
 
         if($proprietes){
+<<<<<<< HEAD
             $this->render('public/propriete/detail', ['proprietes' => $proprietes]);
+=======
+            $this->render('propriete/detail', ['proprietes' => $proprietes]);
+>>>>>>> b7b303adf4a1e36aab518f34d312ece15044b7e3
         }
         else{
             $this->render('error/404');

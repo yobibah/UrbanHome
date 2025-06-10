@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `achat` (
   UNIQUE KEY `id_propriete` (`id_propriete`),
   KEY `id_client` (`id_client`),
   KEY `id_agent` (`id_agent`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `agent` (
   `telephone` varchar(14) NOT NULL,
   `mot_de_passe` int NOT NULL,
   PRIMARY KEY (`id_agent`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `bailleur` (
   `telephone` varchar(14) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL,
   PRIMARY KEY (`id_bailleur`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `bailleur`
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `id_agent` int NOT NULL,
   PRIMARY KEY (`id_client`),
   UNIQUE KEY `id_agent` (`id_agent`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `client`
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   KEY `id_propriete` (`id_propriete`),
   KEY `id_client` (`id_client`),
   KEY `id_agent` (`id_agent`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `manager` (
   `email` varchar(255) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL,
   PRIMARY KEY (`id_manager`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `moyen_paiement` (
   `id_moyen_paiement` int NOT NULL AUTO_INCREMENT,
   `Libelle` varchar(255) NOT NULL,
   PRIMARY KEY (`id_moyen_paiement`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `moyen_paiement`
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `paiement` (
   KEY `id_propriete` (`id_propriete`),
   KEY `id_type_paiement` (`id_type_paiement`),
   KEY `id_bailleur` (`id_bailleur`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -202,8 +202,8 @@ DROP TABLE IF EXISTS `propriete`;
 CREATE TABLE IF NOT EXISTS `propriete` (
   `id_propiete` int NOT NULL AUTO_INCREMENT,
   `id_type` int NOT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `opt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4  NOT NULL,
+  `opt` varchar(255) CHARACTER SET utf8mb4  NOT NULL,
   `situation_geo` varchar(255) NOT NULL,
   `prix` float NOT NULL,
   `image1` varchar(255) NOT NULL,
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `propriete` (
   PRIMARY KEY (`id_propiete`),
   KEY `id_bailleur` (`id_bailleur`),
   KEY `id_type` (`id_type`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `propriete`
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `rendezvous` (
   KEY `id_client` (`id_client`),
   KEY `id_propriete` (`id_propriete`),
   KEY `id_statut` (`id_statut`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `statut_rendezvous` (
   `id_statut` int NOT NULL AUTO_INCREMENT,
   `statut` varchar(20) NOT NULL,
   PRIMARY KEY (`id_statut`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `statut_rendezvous`
@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `type_paiement` (
   `id_moyen_paiement` int NOT NULL,
   PRIMARY KEY (`id_type_paiement`),
   KEY `id_moyen_paiement` (`id_moyen_paiement`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `type_propriete` (
   `id_type` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
   PRIMARY KEY (`id_type`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `type_propriete`

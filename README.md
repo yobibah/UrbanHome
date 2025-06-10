@@ -3,6 +3,7 @@
 UrbanHome est une application web de gestion immobilière basée sur le modèle MVC (Modèle-Vue-Contrôleur).
 
 ## Fonctionnalités principales
+
 - Architecture MVC (Model, View, Controllers)
 - Utilisation de Composer et de l'autoload PHP
 - Gestion multi-utilisateurs : client, bailleur, manager
@@ -12,83 +13,118 @@ UrbanHome est une application web de gestion immobilière basée sur le modèle 
 - Interface responsive et moderne
 
 ## Installation
+
 1. Placer le projet dans un serveur web local (WAMP, XAMPP, etc.) supportant PHP et MySQL
+
 2. Importer la base de données fournie dans votre serveur MySQL
+
 3. Ouvrir le projet dans un éditeur de code (VSCode, PhpStorm, etc.)
+
 4. Installer les dépendances Composer :
+
    ```powershell
    composer install
    composer dump-autoload
-   composer require vlucas/phpdotenv(pour vous permet de charger les variables environnement)
+   composer require vlucas/phpdotenv
    ```
-5. Lancer le serveur PHP intégré :
+
+5. Configurer les variables d'environnement dans un fichier `.env` (exemple : connexion à la base de données).
+
+6. Lancer le serveur PHP intégré :
+
    ```powershell
    php -S localhost:8000 -t public
    ```
-6. Accéder à l'application via [http://localhost:8000](http://localhost:8000)
+
+7. Accéder à l'application via [http://localhost:8000](http://localhost:8000)
 
 ## Structure des dossiers
+
 - `public/` : point d'entrée de l'application (front controller)
+
 - `views/` : vues et layouts (header, footer, navbar, erreurs, etc.)
-- `controllers/` : contrôleurs
+
+- `controllers/` : contrôleurs pour gérer la logique métier
+
 - `model/` : modèles et accès base de données
+
 - `config/` : configuration (connexion PDO, etc.)
-- `routes/` : gestion des routes
+
+- `routes/` : gestion des routes définies dans `Router.php`
+
 - `assets/` : ressources statiques (CSS, JS, images)
 
+## Routes principales
+
+### Public
+
+- `/` : Page d'accueil
+
+- `/public/about` : À propos
+
+- `/public/contact` : Contact
+
+### Propriétés
+
+- `/propriete/liste` : Liste des propriétés
+
+- `/propriete/detail` : Détail d'une propriété
+
+### Bailleur
+
+- `/bailleur` : Connexion bailleur
+
+- `/bailleur/inscription` : Inscription bailleur
+
+- `/bailleur/dashboard` : Tableau de bord du bailleur
+
+- `/bailleur/biens` : Gestion des biens
+
+- `/bailleur/contrats` : Gestion des contrats
+
+- `/bailleur/paiements` : Gestion des paiements
+
+- `/bailleur/messages` : Messagerie
+
+### Client
+
+- `/client/dashboard` : Tableau de bord du client
+
+- `/client/locations` : Liste des locations
+
+## Fonctionnalités récentes
+
+- Gestion des propriétés : ajout, modification, suppression.
+
+- Messages flash basés sur les sessions pour les retours utilisateur.
+
+- Formulaires dynamiques pour les bailleurs et les clients.
+
+- Tableau de bord interactif pour les bailleurs avec indicateurs clés (KPI).
+
 ## Conseils
-- Adaptez les fichiers de configuration à votre environnement (BDD, mail, etc.)
+
+- Adaptez les fichiers de configuration à votre environnement (BDD, mail, etc.).
+
 - Pour la production, configurez votre serveur pour que seul le dossier `public/` soit accessible publiquement.
+
 - Consultez les fichiers d'exemple dans `views/error/` pour personnaliser les pages d'erreur.
 
 ## Tableau de bord du bailleur
 
-### 1. En-tête personnalisé
-- Logo UrbanHome
-- Nom du bailleur (ex. : "Bienvenue, M. Diallo")
-- Photo de profil (optionnelle)
-- Menu de navigation : Tableau de bord | Mes biens | Mes contrats | Paiements | Déconnexion
+Le tableau de bord du bailleur inclut :
 
-### 2. Statistiques clés (KPIs)
-Affichées sous forme de cartes ou de tuiles :
-- Nombre total de biens en location
-- Nombre de contrats actifs
-- Paiements en attente
-- Nouveaux messages ou demandes
+- **En-tête** : Vue d'ensemble des indicateurs clés (KPI).
 
-### 3. Liste des biens immobiliers
-Tableau interactif avec les colonnes suivantes :
-- Nom du bien
-- Adresse
-- Statut (Disponible, Loué, En maintenance)
-- Actions : Voir | Modifier | Supprimer
+- **Liste des propriétés** : Gestion des biens immobiliers.
 
-### 4. Contrats récents
-Section présentant les derniers contrats signés ou en cours de signature, avec des détails tels que :
-- Nom du locataire
-- Date de début
-- Durée
-- Montant du loyer
+- **Contrats** : Suivi des contrats en cours et terminés.
 
-### 5. Paiements récents
-Tableau listant les derniers paiements reçus ou en attente, incluant :
-- Nom du locataire
-- Montant
-- Date de paiement
-- Statut (Payé, En attente)
+- **Paiements** : Historique et gestion des paiements.
 
-### 6. Messagerie
-Interface pour consulter et répondre aux messages des locataires ou de l'administration :
-- Liste des conversations
-- Zone de rédaction
-- Notifications pour les nouveaux messages
+- **Messagerie** : Communication avec les clients et gestion des messages.
 
-### 7. Actions rapides
-Boutons ou liens pour :
-- Ajouter un nouveau bien
-- Créer un nouveau contrat
-- Envoyer un message
-- Télécharger un rapport
+- **Actions rapides** : Ajout de nouvelles propriétés, gestion des profils, etc.
 
 Bonne utilisation de UrbanHome !
 
